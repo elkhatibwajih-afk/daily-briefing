@@ -57,6 +57,7 @@ window.DASHBOARD_DATA = {
     { ticker: "AAPL",  name: "Apple",               price: 296.42, day: "+1.82", month: "-1.27", year: "+50.89",  mktcap: "$4.35T" },
     { ticker: "MSFT",  name: "Microsoft",           price: 399.76, day: "+2.31", month: "-5.25", year: "-15.83",  mktcap: "$2.97T" },
     { ticker: "AMZN",  name: "Amazon",              price: 246.02, day: "+3.13", month: "-6.86", year: "+15.99",  mktcap: "$2.65T" },
+    { ticker: "SPCX",  name: "SpaceX",              price: 192.50, day: "+19.60", month: "n/a",  year: "n/a",     mktcap: "$2.52T" },
     { ticker: "AVGO",  name: "Broadcom",            price: 393.94, day: "+3.11", month: "-7.35", year: "+58.40",  mktcap: "$1.87T" },
     { ticker: "TSLA",  name: "Tesla",               price: 411.15, day: "+1.16", month: "-2.63", year: "+26.39",  mktcap: "$1.54T" },
     { ticker: "META",  name: "Meta Platforms",      price: 593.48, day: "+4.77", month: "-3.38", year: "-13.09",  mktcap: "$1.51T" },
