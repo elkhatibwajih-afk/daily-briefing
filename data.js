@@ -142,6 +142,57 @@ window.DASHBOARD_DATA = {
       source: "Investing.com", url: "https://www.investing.com/news/transcripts/earnings-call-transcript-guidewire-q3-2026-beats-estimates-stock-rises-93CH-4727681", date: "Jun 2026" }
   ],
 
+  /* ---------- VENTURE CAPITAL (GCC-weighted + big global) ---------- */
+  ventureCapital: [
+    { region: "GCC", headline: "Stitch (Saudi) raises $25M Series A — a16z's first-ever GCC investment",
+      summary: "Riyadh fintech Stitch, which builds a cloud-native core banking system (lending, cards, payments, ledgers), raised $25M led by Andreessen Horowitz — the firm's first direct investment in the Gulf. Arbor Ventures, COTU, Raed Ventures and SVC also joined.",
+      source: "Arab News", url: "https://www.arabnews.com/node/2643775/amp", date: "Jun 2026" },
+
+    { region: "GCC", headline: "CargoX (UAE) raises $250M for autonomous logistics",
+      summary: "UAE driverless-delivery startup CargoX, led by ex-Talabat CEO Tomaso Rodriguez, raised $250M from a group led by BlueFive Capital — the largest MENA round of early June, covering last-, middle- and long-haul routes.",
+      source: "Arab News", url: "https://www.arabnews.com/node/2646163/business-economy", date: "Jun 2026" },
+
+    { region: "GCC", headline: "Saudi PIF's HUMAIN commits $3B to xAI and expands AI data centers",
+      summary: "PIF-owned HUMAIN committed $3B to Elon Musk's xAI (Series E) and signed a framework of up to $1.2B with Saudi's National Infrastructure Fund for AI data-center capacity — a marker of Gulf sovereign money flowing into frontier AI.",
+      source: "Data Centre Magazine", url: "https://datacentremagazine.com/news/humain-invests-us-3bn-in-xai-as-saudi-ai-data-centres-expand", date: "Jun 2026" },
+
+    { region: "GCC", headline: "Trukker (UAE) raises $300M in debt financing",
+      summary: "UAE trucking/logistics marketplace Trukker raised $300M in debt — nearly 80% of all UAE startup capital in May — helping push MENA's monthly total to $454.7M across 33 deals (+202% month-on-month).",
+      source: "Wamda", url: "https://www.wamda.com/2026/06/mena-startups-raise-4547-million-2026-led-debt-financing", date: "May 2026" },
+
+    { region: "GCC", headline: "Khwarizmi Ventures launches $70M+ Fund II for GCC startups",
+      summary: "Saudi VC Khwarizmi Ventures held a first close above $70M on Fund II, targeting seed–Series A across the GCC (at least half earmarked for Saudi Arabia), backed by Saudi Venture Capital (SVC).",
+      source: "Wamda", url: "https://www.wamda.com/2026/05/khwarizmi-ventures-launches-fund-ii-70m-close-gcc-startups", date: "May 2026" },
+
+    { region: "GCC", headline: "Uber buys e&'s 12.5% stake in Careem for $100M",
+      summary: "Telecom group e& agreed to sell its 12.5% stake in UAE-born super-app Careem Technologies to Uber for $100M, consolidating Uber's ownership of the business.",
+      source: "Arab News", url: "https://www.arabnews.com/node/2646163/business-economy", date: "Jun 2026" },
+
+    { region: "GCC", headline: "Arib (Saudi) raises $23.5M for digital lending",
+      summary: "Saudi digital-financing marketplace Arib raised $23.5M led by Merak Capital to scale its digital-lending platform.",
+      source: "Wamda", url: "https://www.wamda.com/2026/05/arib-targets-saudi-digital-lending-boom-23-5m-funding-round", date: "Jun 2026" },
+
+    { region: "GCC", headline: "Anara Impact Capital reaches $48M first close for a MENA fund",
+      summary: "MENA-focused impact VC Anara Impact Capital announced a $48M first close (target $50M), backing seed–Series A startups in learning, wellbeing and climate across the region.",
+      source: "Wamda", url: "https://www.wamda.com/2026/06/anara-impact-capital-announces-48-million-close-mena-focused-fund", date: "Jun 2026" },
+
+    { region: "GCC", headline: "SPARQ (Abu Dhabi) raises $8.5M seed for an AI game engine",
+      summary: "Abu Dhabi startup SPARQ, building an AI-powered game engine, raised $8.5M in seed funding with participation from a16z's Scout Fund — part of a busy $258.5M MENA deal week.",
+      source: "entARABI", url: "https://entarabi.com/en/2026/06/during-the-first-week-of-june-2026-startup-investments-reach-258-5-million/", date: "Jun 2026" },
+
+    { region: "Global", headline: "Anthropic becomes the world's most valuable AI startup at $965B",
+      summary: "Anthropic's mega-round valued it at $965B post-money, overtaking OpenAI as the most valuable private AI company (reported raise sizes vary; investors linked include Altimeter, Dragoneer, Greenoaks and Sequoia).",
+      source: "Axios", url: "https://www.axios.com/2026/05/28/anthropic-ai-fundraising-openai", date: "May 2026" },
+
+    { region: "Global", headline: "Mistral AI in talks to raise ~€3B at a ~€20B valuation",
+      summary: "French AI champion Mistral is reportedly raising about €3B (~$3.5B) at a ~€20B valuation — nearly double its September 2025 round — partly to fund Paris-area data centers. Still early-stage talks, not yet closed.",
+      source: "TechCrunch", url: "https://techcrunch.com/2026/06/12/mistral-is-rumored-to-be-raising-e3b-at-e20-valuation/", date: "Jun 2026" },
+
+    { region: "Global", headline: "a16z crypto closes a $2.2B fund despite the downturn",
+      summary: "Andreessen Horowitz's crypto arm raised a $2.2B fund even as the blockchain market cooled — one of the larger dedicated crypto vehicles of this cycle.",
+      source: "TechCrunch", url: "https://techcrunch.com/2026/05/05/as-crypto-cools-a16zcrypto-raises-a-2-2b-fund/", date: "May 2026" }
+  ],
+
   /* ---------- POLITICS ---------- */
   politics: {
 
