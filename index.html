@@ -311,9 +311,8 @@
   </footer>
 </main>
 
-<script src="data.js"></script>
 <script>
-(function(){
+function startDashboard(){
   const D = window.DASHBOARD_DATA;
   const $ = id => document.getElementById(id);
 
@@ -453,6 +452,19 @@
     $('sources').innerHTML = '<strong style="color:var(--muted)">Sources this edition:</strong> '+
       D.sources.map(s=>link(s.url,s.name)).join(' · ');
   }
+}
+
+// Load the data fresh on every page view so the dashboard always shows the
+// latest update — even if the browser cached an older copy of data.js.
+(function(){
+  var s = document.createElement('script');
+  s.src = 'data.js?v=' + Date.now();
+  s.onload = startDashboard;
+  s.onerror = function(){
+    var m = document.querySelector('main');
+    if(m){ m.innerHTML = '<div class="empty" style="margin-top:30px">Could not load <b>data.js</b>. Make sure it sits in the same folder as this file.</div>'; }
+  };
+  document.head.appendChild(s);
 })();
 </script>
 </body>
