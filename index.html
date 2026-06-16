@@ -169,6 +169,8 @@
   .cat-macro{background:rgba(240,97,109,.14);color:var(--down)}
   .cat-capital{background:rgba(160,120,255,.16);color:#b39bff}
   .cat-deal{background:rgba(217,177,96,.14);color:var(--gold)}
+  .cat-gcc{background:rgba(217,177,96,.18);color:var(--gold)}
+  .cat-global{background:rgba(91,140,255,.16);color:var(--accent)}
   .news h4{font-size:14.5px;font-weight:650;margin-bottom:4px;line-height:1.35}
   .news p{font-size:13px;color:var(--muted);line-height:1.5}
   .news .src{font-size:11.5px;color:var(--muted);margin-top:7px}
@@ -223,7 +225,6 @@
         <div class="updated" id="m-updated">—</div>
       </div>
     </div>
-    <div class="tagline">Markets &amp; Geopolitics · curated for you — Middle East / Lebanon politics + investment-banking-grade market intelligence</div>
     <div class="banner" id="banner" style="display:none">
       <span class="lbl">What's moving</span>
       <span class="txt" id="m-driver"></span>
@@ -237,6 +238,7 @@
     <a href="#stocks">Big Stocks</a>
     <a href="#commodities">Commodities</a>
     <a href="#news">Financial News</a>
+    <a href="#vc">Venture Capital</a>
     <a href="#politics">Politics</a>
   </div>
 </nav>
@@ -285,11 +287,16 @@
     <div class="news-list" id="news-list"></div>
   </section>
 
+  <section id="vc">
+    <div class="sec-head fin"><span class="bar"></span><h2>Venture Capital</h2><span class="count">startups &amp; funding — GCC + global</span></div>
+    <div class="news-list" id="vc-list"></div>
+  </section>
+
   <section id="politics">
     <div class="sec-head"><span class="bar"></span><h2>Politics</h2></div>
     <div class="pol-cols">
       <div class="pol-col">
-        <h3><span class="fl">🌍</span> Middle East <span style="color:var(--gold);font-weight:800">· Lebanon focus</span></h3>
+        <h3><span class="fl">🌍</span> Middle East</h3>
         <div id="pol-me"></div>
       </div>
       <div class="pol-col">
@@ -307,7 +314,6 @@
       wasn’t reliably available at update time.
     </div>
     <div id="sources"></div>
-    <div style="margin-top:12px">To refresh this dashboard, open Claude Code in this folder and run <code>/update-news</code>.</div>
   </footer>
 </main>
 
@@ -434,6 +440,17 @@ function startDashboard(){
     chip.classList.add('active'); renderNews(chip.dataset.cat);
   });
   renderNews('All');
+
+  // ---- venture capital ----
+  $('vc-list').innerHTML = (D.ventureCapital||[]).map(function(x){
+    var isGcc = (x.region||'').toLowerCase()==='gcc';
+    return '<div class="news">'+
+      '<div class="cat '+(isGcc?'cat-gcc':'cat-global')+'">'+esc(x.region||'VC')+'</div>'+
+      '<div><h4>'+esc(x.headline)+'</h4>'+
+      '<p>'+esc(x.summary)+'</p>'+
+      '<div class="src">'+link(x.url,x.source||'source')+(x.date?' · <span class="dt">'+esc(x.date)+'</span>':'')+'</div>'+
+      '</div></div>';
+  }).join('') || '<div class="empty">No items.</div>';
 
   // ---- politics ----
   const P = D.politics||{};
