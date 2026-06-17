@@ -258,6 +258,9 @@
   .hero-toggle .hb{background:none;border:none;color:var(--muted);font-family:var(--sans);font-size:12px;font-weight:600;padding:5px 11px;border-radius:7px;cursor:pointer;transition:.15s}
   .hero-toggle .hb:hover{color:var(--text)}
   .hero-toggle .hb.active{background:var(--accent);color:#fff}
+  #hero-chart-area{position:relative}
+  .hero-tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .1s;background:rgba(10,13,20,.95);border:1px solid var(--border2);border-radius:8px;padding:6px 9px;font-family:var(--mono);font-size:12px;color:var(--text);white-space:nowrap;z-index:5;line-height:1.45;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+  .hero-tip b{color:var(--gold)}
 
   /* market sessions clock */
   .sess-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
@@ -760,32 +763,50 @@ function startDashboard(){
     window.addEventListener('beforeunload',function(){ try{window.speechSynthesis.cancel();}catch(e){} });
   })();
 
-  // ---- hero index area chart ----
+  // ---- hero index area chart (hover tooltip + date axis) ----
   (function(){
     var area=$('hero-chart-area'); if(!area) return;
     var idx=((D.markets||{}).indices)||[];
     var pickable=idx.filter(function(x){return x.hist && x.hist.length>=2;});
     if(!pickable.length){ var hc=$('hero-chart'); if(hc) hc.style.display='none'; return; }
-    var cur = pickable.filter(function(x){return (x.name||'').indexOf('S&P')>=0;})[0] || pickable[0];
+    var allDates=(D.histDates||[]);
+    var W=1000,H=300,padX=8,topP=22,botP=34;
+    var cur=pickable.filter(function(x){return (x.name||'').indexOf('S&P')>=0;})[0]||pickable[0];
+    function datesFor(hist){ return allDates.length ? allDates.slice(Math.max(0,allDates.length-hist.length)) : []; }
+    function X(n,i){return (i/(n-1))*(W-2*padX)+padX;}
+    function bounds(hist){ var mn=Math.min.apply(null,hist),mx=Math.max.apply(null,hist); return {mn:mn,rg:(mx-mn)||1}; }
+    function Y(b,v){return topP+(1-((v-b.mn)/b.rg))*(H-topP-botP);}
     function chart(h){
-      var hist=h.hist, W=1000, H=300, padX=8, topP=22, botP=24;
-      var mn=Math.min.apply(null,hist), mx=Math.max.apply(null,hist), rg=(mx-mn)||1, n=hist.length;
-      function X(i){return (i/(n-1))*(W-2*padX)+padX;}
-      function Y(v){return topP+(1-((v-mn)/rg))*(H-topP-botP);}
-      var d='',i; for(i=0;i<n;i++){ d+=(i?' L':'M')+X(i).toFixed(1)+' '+Y(hist[i]).toFixed(1); }
-      var areaD=d+' L'+X(n-1).toFixed(1)+' '+(H-botP)+' L'+X(0).toFixed(1)+' '+(H-botP)+' Z';
+      var hist=h.hist,n=hist.length,b=bounds(hist),dates=datesFor(hist),i;
+      var d=''; for(i=0;i<n;i++){ d+=(i?' L':'M')+X(n,i).toFixed(1)+' '+Y(b,hist[i]).toFixed(1); }
+      var areaD=d+' L'+X(n,n-1).toFixed(1)+' '+(H-botP)+' L'+X(n,0).toFixed(1)+' '+(H-botP)+' Z';
       var up=hist[n-1]>=hist[0], col=up?'#1ec885':'#f0616d';
-      var grid=''; [0,0.5,1].forEach(function(f){ var val=mn+rg*(1-f), y=topP+f*(H-topP-botP); grid+='<line x1="0" y1="'+y.toFixed(1)+'" x2="'+W+'" y2="'+y.toFixed(1)+'" stroke="#262d40" stroke-width="1" opacity="0.6"/><text x="8" y="'+(y-5).toFixed(1)+'" fill="#8b93a8" font-size="12" font-family="ui-monospace,Consolas,monospace">'+Math.round(val).toLocaleString()+'</text>'; });
-      var lx=X(n-1).toFixed(1), ly=Y(hist[n-1]).toFixed(1);
-      return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:300px"><defs><linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+col+'" stop-opacity="0.34"/><stop offset="100%" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+grid+'<path d="'+areaD+'" fill="url(#heroGrad)"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+lx+'" cy="'+ly+'" r="4.5" fill="'+col+'"/></svg>';
+      var grid=''; [0,0.5,1].forEach(function(f){ var val=b.mn+b.rg*(1-f), y=topP+f*(H-topP-botP); grid+='<line x1="0" y1="'+y.toFixed(1)+'" x2="'+W+'" y2="'+y.toFixed(1)+'" stroke="#262d40" stroke-width="1" opacity="0.6"/><text x="8" y="'+(y-5).toFixed(1)+'" fill="#8b93a8" font-size="12" font-family="ui-monospace,Consolas,monospace">'+Math.round(val).toLocaleString()+'</text>'; });
+      var xax=''; if(dates.length){ var t,ti; for(t=0;t<5;t++){ ti=Math.round(t*(n-1)/4); var ax=t===0?'start':(t===4?'end':'middle'); xax+='<text x="'+X(n,ti).toFixed(1)+'" y="'+(H-10)+'" fill="#8b93a8" font-size="11.5" font-family="ui-monospace,Consolas,monospace" text-anchor="'+ax+'">'+esc(dates[ti]||'')+'</text>'; } }
+      return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:300px;display:block"><defs><linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+col+'" stop-opacity="0.34"/><stop offset="100%" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+grid+xax+'<path d="'+areaD+'" fill="url(#heroGrad)"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+X(n,n-1).toFixed(1)+'" cy="'+Y(b,hist[n-1]).toFixed(1)+'" r="4.5" fill="'+col+'"/><line class="hv-line" x1="0" y1="'+topP+'" x2="0" y2="'+(H-botP)+'" stroke="#e8ebf2" stroke-width="1" opacity="0"/><circle class="hv-dot" r="4.5" fill="#ffffff" stroke="'+col+'" stroke-width="2" opacity="0"/></svg>';
     }
     function show(h){
+      cur=h;
       $('hero-name').textContent=h.name;
-      $('hero-meta').textContent='Level '+fmt(h.level,2)+'   ·   1D '+pct(h.day).t+'   ·   YTD '+pct(h.ytd).t+'   ·   last '+h.hist.length+' sessions';
-      area.innerHTML=chart(h);
+      var ds=datesFor(h.hist), range=ds.length?('   ·   '+ds[0]+' – '+ds[ds.length-1]):'';
+      $('hero-meta').textContent='Level '+fmt(h.level,2)+'   ·   1D '+pct(h.day).t+'   ·   YTD '+pct(h.ytd).t+range;
+      area.innerHTML=chart(h)+'<div class="hero-tip" id="hero-tip"></div>';
+      hookHover(h);
+    }
+    function hookHover(h){
+      var svg=area.querySelector('svg'); if(!svg) return;
+      var tip=$('hero-tip'), line=svg.querySelector('.hv-line'), dot=svg.querySelector('.hv-dot');
+      var hist=h.hist,n=hist.length,b=bounds(hist),dates=datesFor(hist);
+      function move(clientX){ var rect=svg.getBoundingClientRect(); var i=Math.round(((clientX-rect.left)/rect.width)*(n-1)); if(i<0)i=0; if(i>n-1)i=n-1; var vx=X(n,i),vy=Y(b,hist[i]); line.setAttribute('x1',vx); line.setAttribute('x2',vx); line.setAttribute('opacity','0.45'); dot.setAttribute('cx',vx); dot.setAttribute('cy',vy); dot.setAttribute('opacity','1'); tip.innerHTML='<b>'+esc(dates[i]||('session '+(i+1)))+'</b><br>'+fmt(hist[i],2); var px=(vx/W)*rect.width; tip.style.opacity='1'; tip.style.left=Math.min(Math.max(px-50,4),Math.max(rect.width-104,4))+'px'; tip.style.top=Math.max((vy/H)*rect.height-48,2)+'px'; }
+      function hide(){ line.setAttribute('opacity','0'); dot.setAttribute('opacity','0'); tip.style.opacity='0'; }
+      svg.addEventListener('mousemove',function(e){ move(e.clientX); });
+      svg.addEventListener('mouseleave',hide);
+      svg.addEventListener('touchstart',function(e){ if(e.touches[0]) move(e.touches[0].clientX); },{passive:true});
+      svg.addEventListener('touchmove',function(e){ if(e.touches[0]) move(e.touches[0].clientX); },{passive:true});
+      svg.addEventListener('touchend',hide);
     }
     $('hero-pick').innerHTML=pickable.slice(0,5).map(function(x){return '<button class="hb" data-i="'+idx.indexOf(x)+'">'+esc(x.name)+'</button>';}).join('');
-    $('hero-pick').addEventListener('click',function(e){var b=e.target.closest('.hb');if(!b)return;var x=idx[parseInt(b.getAttribute('data-i'),10)];Array.prototype.forEach.call($('hero-pick').querySelectorAll('.hb'),function(z){z.classList.remove('active');});b.classList.add('active');show(x);});
+    $('hero-pick').addEventListener('click',function(e){var btn=e.target.closest('.hb');if(!btn)return;var x=idx[parseInt(btn.getAttribute('data-i'),10)];Array.prototype.forEach.call($('hero-pick').querySelectorAll('.hb'),function(z){z.classList.remove('active');});btn.classList.add('active');show(x);});
     show(cur);
     Array.prototype.forEach.call($('hero-pick').querySelectorAll('.hb'),function(z){ if(idx[parseInt(z.getAttribute('data-i'),10)]===cur) z.classList.add('active'); });
   })();
