@@ -233,6 +233,27 @@ window.DASHBOARD_DATA = {
     { label: "Bank-System Losses", value: "~$80–83B",    sub: "The 'gap'; over $100B of deposits frozen" }
   ],
 
+  /* ---------- GEOPOLITICAL MAP (today's hotspots) ---------- */
+  mapPoints: [
+    { place: "Beirut",          lat: 33.89, lng: 35.50,  weight: 3, region: "Lebanon",     label: "Israeli strikes on Dahieh; US–Iran deal covers Lebanon" },
+    { place: "Geneva",          lat: 46.20, lng: 6.14,   weight: 3, region: "Iran",        label: "US–Iran peace deal signing, Jun 19" },
+    { place: "Washington",      lat: 38.90, lng: -77.04, weight: 3, region: "US",          label: "Fed rate decision; US–Iran deal" },
+    { place: "Tehran",          lat: 35.69, lng: 51.39,  weight: 2, region: "Iran",        label: "US–Iran war ending; sanctions relief" },
+    { place: "Gaza",            lat: 31.50, lng: 34.47,  weight: 2, region: "Israel-Gaza", label: "Fragile ceasefire; renewed strikes" },
+    { place: "Strait of Hormuz",lat: 26.57, lng: 56.25,  weight: 2, region: "Iran",        label: "Blockade to lift; oil slides" },
+    { place: "Riyadh",          lat: 24.71, lng: 46.68,  weight: 2, region: "Gulf",        label: "Saudi PIF/HUMAIN ~$10B AI fund" },
+    { place: "Abu Dhabi",       lat: 24.45, lng: 54.38,  weight: 2, region: "Gulf",        label: "UAE startup mega-rounds (CargoX $250M)" },
+    { place: "New York",        lat: 40.71, lng: -74.01, weight: 2, region: "US",          label: "Dow record; SpaceX–Cursor $60B deal" },
+    { place: "Doha",            lat: 25.29, lng: 51.53,  weight: 1, region: "Gulf",        label: "QIA triples venture fund to $3B" },
+    { place: "Damascus",        lat: 33.51, lng: 36.29,  weight: 1, region: "Syria",       label: "US/EU permanently lift sanctions" }
+  ],
+  mapArcs: [
+    { from: [38.90, -77.04], to: [35.69, 51.39] },
+    { from: [35.69, 51.39],  to: [33.89, 35.50] },
+    { from: [38.90, -77.04], to: [46.20, 6.14] },
+    { from: [35.69, 51.39],  to: [26.57, 56.25] }
+  ],
+
   /* ---------- POLITICS ---------- */
   politics: {
 
