@@ -218,6 +218,27 @@
   .stat .val{font-family:var(--mono);font-size:18px;font-weight:600;letter-spacing:-.3px}
   .stat .sub{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35}
 
+  /* ticker tape */
+  .ticker{overflow:hidden;border-bottom:1px solid var(--border);background:var(--bg2)}
+  .ticker-track{display:inline-block;white-space:nowrap;padding:8px 0;animation:tickerScroll 80s linear infinite;will-change:transform}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-item{display:inline-flex;align-items:center;gap:7px;padding:0 18px;font-family:var(--mono);font-size:12.5px;border-right:1px solid var(--border)}
+  .ticker-item .tk-name{color:var(--muted)}
+  .ticker-item .tk-val{color:var(--text);font-weight:600}
+  @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* market heatmap */
+  .hm-controls{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .hm-toggle{display:inline-flex;background:var(--panel);border:1px solid var(--border);border-radius:9px;padding:3px;gap:2px}
+  .hm-btn{background:none;border:none;color:var(--muted);font-family:var(--sans);font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;transition:.15s}
+  .hm-btn:hover{color:var(--text)}
+  .hm-btn.active{background:var(--accent);color:#fff}
+  .hm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+  .hm-tile{border-radius:10px;padding:13px 12px;min-height:72px;display:flex;flex-direction:column;justify-content:center;gap:3px;border:1px solid var(--border);transition:transform .1s,box-shadow .1s}
+  .hm-tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--border2)}
+  .hm-tile .hm-tkr{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--text);line-height:1.2}
+  .hm-tile .hm-val{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--text)}
+
   /* Footer */
   footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.7}
   footer .disc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:14px}
@@ -252,9 +273,12 @@
   </div>
 </header>
 
+<div class="ticker"><div class="ticker-track" id="ticker-track"></div></div>
+
 <nav class="sub">
   <div class="wrap">
     <a href="#markets">Markets</a>
+    <a href="#heatmap">Heatmap</a>
     <a href="#weekahead">Week Ahead</a>
     <a href="#stocks">Big Stocks</a>
     <a href="#commodities">Commodities</a>
@@ -276,6 +300,24 @@
     </div>
     <h3 class="sub-h">Regional Markets — GCC &amp; Egypt</h3>
     <div class="grid idx-grid" id="regional"></div>
+  </section>
+
+  <section id="heatmap">
+    <div class="sec-head fin"><span class="bar"></span><h2>Market Heatmap</h2><span class="count">color = move size · green up / red down</span></div>
+    <div class="hm-controls">
+      <div class="hm-toggle" id="hm-set">
+        <button class="hm-btn active" data-set="stocks">Big Stocks</button>
+        <button class="hm-btn" data-set="indices">Indices</button>
+        <button class="hm-btn" data-set="regional">Regional</button>
+        <button class="hm-btn" data-set="commodities">Commodities</button>
+      </div>
+      <div class="hm-toggle" id="hm-metric">
+        <button class="hm-btn active" data-metric="d">1&nbsp;Day</button>
+        <button class="hm-btn" data-metric="m">1&nbsp;Month</button>
+        <button class="hm-btn" data-metric="l">YTD&nbsp;/&nbsp;1Y</button>
+      </div>
+    </div>
+    <div class="hm-grid" id="hm-grid"></div>
   </section>
 
   <section id="weekahead">
@@ -539,6 +581,54 @@ function startDashboard(){
     $('sources').innerHTML = '<strong style="color:var(--muted)">Sources this edition:</strong> '+
       D.sources.map(s=>link(s.url,s.name)).join(' · ');
   }
+
+  // ---- ticker tape ----
+  (function(){
+    var t=$('ticker-track'); if(!t) return;
+    var items=[];
+    (((D.markets||{}).indices)||[]).forEach(function(x){ items.push({n:x.name, v:fmt(x.level,2), c:x.day}); });
+    (D.stocks||[]).forEach(function(x){ items.push({n:x.ticker, v:'$'+fmt(x.price,2), c:x.day}); });
+    (D.commodities||[]).forEach(function(x){ items.push({n:x.name, v:fmt(x.price,2), c:x.day}); });
+    (((D.markets||{}).crypto)||[]).forEach(function(x){ items.push({n:x.name, v:'$'+fmt(x.price,0), c:x.day}); });
+    if(!items.length){ if(t.parentNode) t.parentNode.style.display='none'; return; }
+    var html=items.map(function(x){ var p=pct(x.c); return '<span class="ticker-item"><span class="tk-name">'+esc(x.n)+'</span><span class="tk-val">'+esc(x.v)+'</span><span class="'+p.c+'">'+p.t+'</span></span>'; }).join('');
+    t.innerHTML=html+html;
+  })();
+
+  // ---- market heatmap ----
+  (function(){
+    var grid=$('hm-grid'); if(!grid) return;
+    var curSet='stocks', curMetric='d';
+    var maxes={d:4, m:12, l:35};
+    function rows(which){
+      if(which==='indices') return (((D.markets||{}).indices)||[]).map(function(x){return {label:x.name, full:x.name, d:x.day, m:x.month, l:x.ytd};});
+      if(which==='regional') return (D.regionalMarkets||[]).map(function(x){return {label:x.name, full:x.name, d:x.day, m:x.month, l:x.ytd};});
+      if(which==='commodities') return (D.commodities||[]).map(function(x){return {label:x.name, full:x.name, d:x.day, m:x.month, l:x.ytd};});
+      return (D.stocks||[]).map(function(x){return {label:x.ticker, full:x.name, d:x.day, m:x.month, l:x.year};});
+    }
+    function color(v,metric){
+      if(v==null||v==='n/a') return 'background:var(--panel2)';
+      var n=parseFloat(String(v).replace(/[+%]/g,'')); if(isNaN(n)) return 'background:var(--panel2)';
+      var max=maxes[metric]||10; var tt=Math.max(-1,Math.min(1,n/max));
+      var a=(0.10+0.55*Math.abs(tt)).toFixed(2);
+      return 'background:rgba('+(n>=0?'30,200,133':'240,97,109')+','+a+')';
+    }
+    function draw(){
+      grid.innerHTML=rows(curSet).map(function(x){
+        var v=x[curMetric];
+        return '<div class="hm-tile" style="'+color(v,curMetric)+'" title="'+esc(x.full)+'"><div class="hm-tkr">'+esc(x.label)+'</div><div class="hm-val">'+pct(v).t+'</div></div>';
+      }).join('') || '<div class="empty">No data.</div>';
+    }
+    function bind(id,kind){
+      var box=$(id); if(!box) return;
+      box.addEventListener('click',function(e){ var b=e.target.closest('.hm-btn'); if(!b) return;
+        if(kind==='set') curSet=b.getAttribute('data-set'); else curMetric=b.getAttribute('data-metric');
+        Array.prototype.forEach.call(box.querySelectorAll('.hm-btn'),function(z){z.classList.remove('active');});
+        b.classList.add('active'); draw(); });
+    }
+    bind('hm-set','set'); bind('hm-metric','metric');
+    draw();
+  })();
 }
 
 // Load the data fresh on every page view so the dashboard always shows the
