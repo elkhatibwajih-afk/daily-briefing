@@ -249,6 +249,34 @@
   .idx-spark{margin-top:9px}
   .idx-spark .spark{width:100%;height:30px;display:block;opacity:.92}
 
+  /* hero index chart */
+  .hero{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--border);border-radius:14px;padding:18px 20px 12px;margin-top:24px;box-shadow:var(--shadow)}
+  .hero-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+  .hero-title{font-size:20px;font-weight:700;letter-spacing:-.3px}
+  .hero-sub{font-size:12.5px;color:var(--muted);margin-top:3px;font-family:var(--mono)}
+  .hero-toggle{display:inline-flex;background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:3px;gap:2px;flex-wrap:wrap}
+  .hero-toggle .hb{background:none;border:none;color:var(--muted);font-family:var(--sans);font-size:12px;font-weight:600;padding:5px 11px;border-radius:7px;cursor:pointer;transition:.15s}
+  .hero-toggle .hb:hover{color:var(--text)}
+  .hero-toggle .hb.active{background:var(--accent);color:#fff}
+
+  /* market sessions clock */
+  .sess-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .sess{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center;transition:.2s}
+  .sess.open{border-color:rgba(30,200,133,.45);box-shadow:0 0 0 1px rgba(30,200,133,.18),0 0 20px rgba(30,200,133,.10)}
+  .sess-city{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:8px}
+  .sess-time{font-family:var(--mono);font-size:23px;font-weight:600;letter-spacing:.5px;color:var(--text)}
+  .sess-status{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-top:8px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
+  .sess-status .sdot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+  .sess.open .sess-status{color:var(--up)}
+  .sess.open .sess-status .sdot{background:var(--up);box-shadow:0 0 8px var(--up)}
+
+  /* geopolitical map */
+  .map-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#0b1018;box-shadow:var(--shadow)}
+  #map-svg svg{display:block;width:100%;height:auto}
+  .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--muted);align-items:center}
+  .map-legend .lg{display:inline-flex;align-items:center;gap:6px}
+  .map-legend .lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
   /* Footer */
   footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.7}
   footer .disc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:14px}
@@ -295,11 +323,28 @@
     <a href="#commodities">Commodities</a>
     <a href="#news">Financial News</a>
     <a href="#vc">Venture Capital</a>
+    <a href="#worldmap">World Map</a>
     <a href="#politics">Politics</a>
   </div>
 </nav>
 
 <main class="wrap">
+
+  <section id="hero-chart" class="hero">
+    <div class="hero-head">
+      <div>
+        <div class="hero-title" id="hero-name">Index</div>
+        <div class="hero-sub" id="hero-meta"></div>
+      </div>
+      <div class="hero-toggle" id="hero-pick"></div>
+    </div>
+    <div id="hero-chart-area"></div>
+  </section>
+
+  <section id="sessions">
+    <div class="sec-head fin"><span class="bar"></span><h2>Market Sessions</h2><span class="count">live local time · open or closed right now</span></div>
+    <div class="sess-grid" id="sessions-grid"></div>
+  </section>
 
   <section id="markets">
     <div class="sec-head fin"><span class="bar"></span><h2>Market Snapshot</h2><span class="count" id="c-asof"></span></div>
@@ -373,6 +418,12 @@
     <div class="news-list" id="vc-list"></div>
   </section>
 
+  <section id="worldmap">
+    <div class="sec-head"><span class="bar"></span><h2>Geopolitical Map of the Day</h2><span class="count">today's hotspots — pulsing by importance</span></div>
+    <div class="map-wrap"><div id="map-svg"></div></div>
+    <div class="map-legend" id="map-legend"></div>
+  </section>
+
   <section id="politics">
     <div class="sec-head"><span class="bar"></span><h2>Politics</h2></div>
     <div class="leb-econ-wrap">
@@ -435,7 +486,7 @@ function startDashboard(){
     if(!hist||hist.length<2) return '';
     var mn=Math.min.apply(null,hist), mx=Math.max.apply(null,hist), rg=(mx-mn)||1, n=hist.length;
     var pts=hist.map(function(v,i){ var x=(i/(n-1))*(w-2)+1; var y=h-1.5-((v-mn)/rg)*(h-3); return x.toFixed(1)+','+y.toFixed(1); }).join(' ');
-    var col = hist[n-1]>=hist[0] ? 'var(--up)' : 'var(--down)';
+    var col = hist[n-1]>=hist[0] ? '#1ec885' : '#f0616d';
     return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   }
 
@@ -705,6 +756,97 @@ function startDashboard(){
       on=true; btn.innerHTML='⏸ Stop'; btn.classList.add('playing');
     });
     window.addEventListener('beforeunload',function(){ try{window.speechSynthesis.cancel();}catch(e){} });
+  })();
+
+  // ---- hero index area chart ----
+  (function(){
+    var area=$('hero-chart-area'); if(!area) return;
+    var idx=((D.markets||{}).indices)||[];
+    var pickable=idx.filter(function(x){return x.hist && x.hist.length>=2;});
+    if(!pickable.length){ var hc=$('hero-chart'); if(hc) hc.style.display='none'; return; }
+    var cur = pickable.filter(function(x){return (x.name||'').indexOf('S&P')>=0;})[0] || pickable[0];
+    function chart(h){
+      var hist=h.hist, W=1000, H=300, padX=8, topP=22, botP=24;
+      var mn=Math.min.apply(null,hist), mx=Math.max.apply(null,hist), rg=(mx-mn)||1, n=hist.length;
+      function X(i){return (i/(n-1))*(W-2*padX)+padX;}
+      function Y(v){return topP+(1-((v-mn)/rg))*(H-topP-botP);}
+      var d='',i; for(i=0;i<n;i++){ d+=(i?' L':'M')+X(i).toFixed(1)+' '+Y(hist[i]).toFixed(1); }
+      var areaD=d+' L'+X(n-1).toFixed(1)+' '+(H-botP)+' L'+X(0).toFixed(1)+' '+(H-botP)+' Z';
+      var up=hist[n-1]>=hist[0], col=up?'#1ec885':'#f0616d';
+      var grid=''; [0,0.5,1].forEach(function(f){ var val=mn+rg*(1-f), y=topP+f*(H-topP-botP); grid+='<line x1="0" y1="'+y.toFixed(1)+'" x2="'+W+'" y2="'+y.toFixed(1)+'" stroke="#262d40" stroke-width="1" opacity="0.6"/><text x="8" y="'+(y-5).toFixed(1)+'" fill="#8b93a8" font-size="12" font-family="ui-monospace,Consolas,monospace">'+Math.round(val).toLocaleString()+'</text>'; });
+      var lx=X(n-1).toFixed(1), ly=Y(hist[n-1]).toFixed(1);
+      return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:300px"><defs><linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+col+'" stop-opacity="0.34"/><stop offset="100%" stop-color="'+col+'" stop-opacity="0"/></linearGradient></defs>'+grid+'<path d="'+areaD+'" fill="url(#heroGrad)"/><path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="'+lx+'" cy="'+ly+'" r="4.5" fill="'+col+'"/></svg>';
+    }
+    function show(h){
+      $('hero-name').textContent=h.name;
+      $('hero-meta').textContent='Level '+fmt(h.level,2)+'   ·   1D '+pct(h.day).t+'   ·   YTD '+pct(h.ytd).t+'   ·   last '+h.hist.length+' sessions';
+      area.innerHTML=chart(h);
+    }
+    $('hero-pick').innerHTML=pickable.slice(0,5).map(function(x){return '<button class="hb" data-i="'+idx.indexOf(x)+'">'+esc(x.name)+'</button>';}).join('');
+    $('hero-pick').addEventListener('click',function(e){var b=e.target.closest('.hb');if(!b)return;var x=idx[parseInt(b.getAttribute('data-i'),10)];Array.prototype.forEach.call($('hero-pick').querySelectorAll('.hb'),function(z){z.classList.remove('active');});b.classList.add('active');show(x);});
+    show(cur);
+    Array.prototype.forEach.call($('hero-pick').querySelectorAll('.hb'),function(z){ if(idx[parseInt(z.getAttribute('data-i'),10)]===cur) z.classList.add('active'); });
+  })();
+
+  // ---- market sessions clock (live) ----
+  (function(){
+    var grid=$('sessions-grid'); if(!grid) return;
+    var mk=[
+      {city:'New York', flag:'🇺🇸', off:-4, open:9.5,  close:16,   days:[1,2,3,4,5]},
+      {city:'London',   flag:'🇬🇧', off:1,  open:8,    close:16.5, days:[1,2,3,4,5]},
+      {city:'Tokyo',    flag:'🇯🇵', off:9,  open:9,    close:15,   days:[1,2,3,4,5]},
+      {city:'Dubai',    flag:'🇦🇪', off:4,  open:10,   close:14,   days:[0,1,2,3,4]},
+      {city:'Riyadh',   flag:'🇸🇦', off:3,  open:10,   close:15,   days:[0,1,2,3,4]}
+    ];
+    function render(){
+      var now=new Date();
+      var utcH=now.getUTCHours()+now.getUTCMinutes()/60+now.getUTCSeconds()/3600, utcDay=now.getUTCDay();
+      grid.innerHTML=mk.map(function(m){
+        var lh=utcH+m.off, day=utcDay;
+        while(lh>=24){lh-=24;day=(day+1)%7;} while(lh<0){lh+=24;day=(day+6)%7;}
+        var hh=Math.floor(lh), mm=Math.floor((lh-hh)*60), ss=Math.floor(((lh-hh)*60-mm)*60);
+        var pad=function(z){return (z<10?'0':'')+z;};
+        var isOpen=m.days.indexOf(day)>=0 && lh>=m.open && lh<m.close;
+        return '<div class="sess'+(isOpen?' open':'')+'"><div class="sess-city">'+m.flag+' '+m.city+'</div>'+
+          '<div class="sess-time">'+pad(hh)+':'+pad(mm)+':'+pad(ss)+'</div>'+
+          '<div class="sess-status"><span class="sdot"></span>'+(isOpen?'Open':'Closed')+'</div></div>';
+      }).join('');
+    }
+    render(); setInterval(render,1000);
+  })();
+
+  // ---- geopolitical map of the day ----
+  (function(){
+    var host=$('map-svg'); if(!host) return;
+    var pts=(D.mapPoints||[]);
+    if(!pts.length){ var s=$('worldmap'); if(s) s.style.display='none'; return; }
+    var W=1000,H=500;
+    function X(lng){return (lng+180)/360*W;}
+    function Y(lat){return (90-lat)/180*H;}
+    var colors={Lebanon:'#d9b160',Iran:'#f0616d','Israel-Gaza':'#f0616d',Gulf:'#1ec885',US:'#5b8cff',Syria:'#b39bff',Regional:'#8b93a8'};
+    var continents='<g fill="#33415c" opacity="0.16" filter="url(#mb)">'+
+      '<path d="M150,90 L230,75 L300,100 L295,140 L250,170 L300,175 L260,210 L205,205 L165,165 L130,140 L125,110 Z"/>'+
+      '<path d="M280,250 L330,265 L335,315 L300,400 L282,430 L268,360 L262,300 Z"/>'+
+      '<path d="M475,100 L560,90 L575,120 L535,150 L495,160 L472,130 Z"/>'+
+      '<path d="M490,175 L600,170 L615,250 L560,355 L515,375 L498,290 L478,225 Z"/>'+
+      '<path d="M575,85 L770,70 L880,95 L900,140 L820,175 L760,165 L660,180 L605,150 L575,120 Z"/>'+
+      '<path d="M800,330 L890,325 L905,365 L835,395 L800,370 Z"/></g>';
+    var grat='<g stroke="#1b2535" stroke-width="1">',lng,lat;
+    for(lng=-150;lng<=150;lng+=30){ grat+='<line x1="'+X(lng).toFixed(1)+'" y1="0" x2="'+X(lng).toFixed(1)+'" y2="'+H+'"/>'; }
+    for(lat=-60;lat<=60;lat+=30){ grat+='<line x1="0" y1="'+Y(lat).toFixed(1)+'" x2="'+W+'" y2="'+Y(lat).toFixed(1)+'"/>'; }
+    grat+='</g>';
+    var arcs=(D.mapArcs||[]).map(function(a){ var x1=X(a.from[1]),y1=Y(a.from[0]),x2=X(a.to[1]),y2=Y(a.to[0]); var mx=(x1+x2)/2,my=(y1+y2)/2-Math.abs(x2-x1)*0.16-18;
+      return '<path d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' Q'+mx.toFixed(1)+' '+my.toFixed(1)+' '+x2.toFixed(1)+' '+y2.toFixed(1)+'" fill="none" stroke="#d9b160" stroke-width="1.1" opacity="0.45" stroke-dasharray="3 5"/>'; }).join('');
+    var markers=pts.map(function(p){ var x=X(p.lng).toFixed(1),y=Y(p.lat).toFixed(1),r=4+(p.weight||1)*2,c=colors[p.region]||'#5b8cff';
+      return '<g><title>'+esc(p.place)+' — '+esc(p.label||'')+'</title>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="'+(r*1.6).toFixed(1)+'" fill="'+c+'" opacity="0.16"><animate attributeName="r" values="'+(r*1.5).toFixed(1)+';'+(r*3.2).toFixed(1)+';'+(r*1.5).toFixed(1)+'" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.22;0.02;0.22" dur="3s" repeatCount="indefinite"/></circle>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="'+r.toFixed(1)+'" fill="'+c+'"/>'+
+        '<circle cx="'+x+'" cy="'+y+'" r="'+r.toFixed(1)+'" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.55"/></g>'; }).join('');
+    var labels=pts.map(function(p){ if((p.weight||1)<3) return ''; var x=X(p.lng),y=Y(p.lat),end=x>W-170,tx=(end?x-9:x+9).toFixed(1);
+      return '<text x="'+tx+'" y="'+(y+3.5).toFixed(1)+'" fill="#e8ebf2" font-size="12.5" font-weight="600" font-family="-apple-system,Segoe UI,sans-serif" text-anchor="'+(end?'end':'start')+'">'+esc(p.place)+'</text>'; }).join('');
+    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto"><defs><filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter><radialGradient id="mbg" cx="50%" cy="38%" r="78%"><stop offset="0%" stop-color="#0e1622"/><stop offset="100%" stop-color="#080b12"/></radialGradient></defs><rect width="'+W+'" height="'+H+'" fill="url(#mbg)"/>'+continents+grat+arcs+markers+labels+'</svg>';
+    var seen={},leg=[]; pts.forEach(function(p){ if(!seen[p.region]){seen[p.region]=1;leg.push(p.region);} });
+    var lh=$('map-legend'); if(lh) lh.innerHTML=leg.map(function(rg){return '<span class="lg"><i style="background:'+(colors[rg]||'#5b8cff')+'"></i>'+esc(rg)+'</span>';}).join('')+'<span class="lg" style="margin-left:auto;opacity:.75">dot size = importance · gold arcs link related events</span>';
   })();
 }
 
