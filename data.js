@@ -19,15 +19,15 @@ window.DASHBOARD_DATA = {
   markets: {
 
     indices: [
-      { name: "S&P 500",          level: 7511.35,  day: "-0.57", month: "+1.40", ytd: "+9.70" },
-      { name: "Nasdaq Composite", level: 26376.34, day: "-1.15", month: "+2.00", ytd: "+13.50" },
+      { name: "S&P 500",          level: 7511.35,  day: "-0.57", month: "+1.40", ytd: "+9.70", hist: [7354,7433,7446,7473,7519,7520,7564,7580,7600,7610,7554,7584,7384,7406,7387,7267,7394,7431,7554,7511] },
+      { name: "Nasdaq Composite", level: 26376.34, day: "-1.15", month: "+2.00", ytd: "+13.50", hist: [25871,26270,26293,26344,26656,26675,26917,26973,27087,27094,26854,26831,25709,25930,25679,25170,25810,25889,26684,26376] },
       { name: "Nasdaq 100",       level: 30107.50, day: "-1.89", month: "+1.00", ytd: "+13.00", note: "YTD approximate (exact year-end-2025 base unconfirmed)." },
-      { name: "Dow Jones",        level: 51999.67, day: "+0.64", month: "+3.00", ytd: "+8.20", note: "Record close, just shy of 52,000." },
-      { name: "Russell 2000",     level: 2939.19,  day: "-0.87", month: "+3.00", ytd: "+18.40" },
-      { name: "STOXX Europe 600", level: 636.00,   day: "+0.64", month: "+4.00", ytd: "+7.40" },
-      { name: "FTSE 100",         level: 10494.21, day: "+0.61", month: "+3.00", ytd: "+5.70" },
-      { name: "Nikkei 225",       level: 69404.50, day: "+0.13", month: "+5.00", ytd: "+37.90", note: "Near record highs. Some data sites misreport YTD ~+80% (a base-date error) — true YTD is ~+38%." },
-      { name: "Hang Seng",        level: 24354.00, day: "-0.57", month: "-2.00", ytd: "-5.00" }
+      { name: "Dow Jones",        level: 51999.67, day: "+0.64", month: "+3.00", ytd: "+8.20", note: "Record close, just shy of 52,000.", hist: [49364,50009,50286,50580,50462,50644,50669,51032,51079,51308,50687,51562,50867,50786,50872,49919,50849,51202,51671,52000] },
+      { name: "Russell 2000",     level: 2939.19,  day: "-0.87", month: "+3.00", ytd: "+18.40", hist: [2747,2817,2843,2869,2921,2920,2937,2919,2906,2932,2894,2935,2834,2855,2867,2835,2921,2944,2965,2939] },
+      { name: "STOXX Europe 600", level: 636.00,   day: "+0.64", month: "+4.00", ytd: "+7.40", hist: [621,625,632,628,628,625,626,621,625,621,624,623,622,619,619,618,622,633,634,636,637] },
+      { name: "FTSE 100",         level: 10494.21, day: "+0.61", month: "+3.00", ytd: "+5.70", hist: [10432,10443,10466,10491,10505,10426,10409,10339,10374,10332,10360,10368,10373,10227,10255,10304,10472,10431,10494,10478] },
+      { name: "Nikkei 225",       level: 69404.50, day: "+0.13", month: "+5.00", ytd: "+37.90", note: "Near record highs. Some data sites misreport YTD ~+80% (a base-date error) — true YTD is ~+38%.", hist: [64996,64999,64693,66330,66310,66934,66734,68402,67471,66588,63792,64025,65417,64179,64217,66020,68463,69318,68755,69980] },
+      { name: "Hang Seng",        level: 24354.00, day: "-0.57", month: "-2.00", ytd: "-5.00", hist: [25651,25387,25606,25599,25328,25006,25182,25398,26038,25633,25253,24962,24657,24566,24408,24249,24718,24843,24494,24312] }
     ],
 
     rates: [
@@ -79,17 +79,17 @@ window.DASHBOARD_DATA = {
   /* ---------- BIG STOCKS (largest by market cap) ---------- */
   /* Price & 1-day = Tue Jun 16 close · 1M / 1Y = trailing price return */
   stocks: [
-    { ticker: "NVDA",  name: "Nvidia",              price: 207.41, day: "-2.37", month: "-7.9",  year: "+46.1",  mktcap: "$5.03T" },
-    { ticker: "GOOGL", name: "Alphabet",            price: 373.25, day: "+1.06", month: "-5.9",  year: "+113.7", mktcap: "$4.56T" },
-    { ticker: "AAPL",  name: "Apple",               price: 299.24, day: "+0.95", month: "-0.3",  year: "+52.3",  mktcap: "$4.39T" },
-    { ticker: "MSFT",  name: "Microsoft",           price: 393.83, day: "-1.48", month: "-6.7",  year: "-17.1",  mktcap: "$2.93T" },
-    { ticker: "SPCX",  name: "SpaceX",              price: 201.80, day: "+4.83", month: "n/a",   year: "n/a",    mktcap: "$2.65T" },
-    { ticker: "AMZN",  name: "Amazon",              price: 246.00, day: "-0.01", month: "-6.9",  year: "+16.0",  mktcap: "$2.64T" },
-    { ticker: "AVGO",  name: "Broadcom",            price: 376.71, day: "-4.37", month: "-11.4", year: "+51.5",  mktcap: "$1.79T" },
-    { ticker: "META",  name: "Meta Platforms",      price: 600.21, day: "+1.13", month: "-2.3",  year: "-12.1",  mktcap: "$1.53T" },
-    { ticker: "TSLA",  name: "Tesla",               price: 404.66, day: "-1.58", month: "-4.2",  year: "+24.4",  mktcap: "$1.52T" },
-    { ticker: "BRK.B", name: "Berkshire Hathaway",  price: 494.95, day: "-0.12", month: "+2.5",  year: "+1.5",   mktcap: "$1.07T" },
-    { ticker: "JPM",   name: "JPMorgan Chase",      price: 331.14, day: "+3.68", month: "+11.2", year: "+25.0",  mktcap: "$887B" }
+    { ticker: "NVDA",  name: "Nvidia",              price: 207.41, day: "-2.37", month: "-7.9",  year: "+46.1",  mktcap: "$5.03T", hist: [220.6,223.5,219.5,215.3,214.9,212.6,214.3,211.1,224.4,222.8,214.8,218.7,205.1,208.6,208.2,200.4,204.9,205.2,212.5,207.4] },
+    { ticker: "GOOGL", name: "Alphabet",            price: 373.25, day: "+1.06", month: "-5.9",  year: "+113.7", mktcap: "$4.56T", hist: [387.7,388.9,387.7,383,388.9,388.8,390.1,380.3,376.4,361.9,359,372.2,368.5,363.3,364.3,356.4,357.8,359.7,369.4,373.3] },
+    { ticker: "AAPL",  name: "Apple",               price: 299.24, day: "+0.95", month: "-0.3",  year: "+52.3",  mktcap: "$4.39T", hist: [299,302.3,305,308.8,308.3,310.9,312.5,312.1,306.3,315.2,310.3,311.2,307.3,301.5,290.6,291.6,295.6,291.1,296.4,299.2] },
+    { ticker: "MSFT",  name: "Microsoft",           price: 393.83, day: "-1.48", month: "-6.7",  year: "-17.1",  mktcap: "$2.93T", hist: [417.4,421.1,419.1,418.6,416,412.7,427,450.2,460.5,441.3,427.3,428.1,416.7,411.7,403.4,397.4,390.3,390.7,399.8,393.8] },
+    { ticker: "SPCX",  name: "SpaceX",              price: 201.80, day: "+4.83", month: "n/a",   year: "n/a",    mktcap: "$2.65T", hist: [192.5,201.8] },
+    { ticker: "AMZN",  name: "Amazon",              price: 246.00, day: "-0.01", month: "-6.9",  year: "+16.0",  mktcap: "$2.64T", hist: [259.3,265,268.5,266.3,265.3,271.9,274,270.6,261.3,256.5,250,253.8,246,245.2,244.2,238,241.5,238.6,246,246] },
+    { ticker: "AVGO",  name: "Broadcom",            price: 376.71, day: "-4.37", month: "-11.4", year: "+51.5",  mktcap: "$1.79T", hist: [411.1,417.8,414.6,414.1,422,421.9,426.6,446.8,460,481.6,479.2,418.9,385.7,396.6,392.2,372.1,385.6,382.1,393.9,376.7] },
+    { ticker: "META",  name: "Meta Platforms",      price: 600.21, day: "+1.13", month: "-2.3",  year: "-12.1",  mktcap: "$1.53T", hist: [602.6,605.1,607.4,610.3,612.3,635.3,635.3,632.5,600.5,597.6,623,627.6,593,585.4,584.6,571,568.4,567,593.5,600.2] },
+    { ticker: "TSLA",  name: "Tesla",               price: 404.66, day: "-1.58", month: "-4.2",  year: "+24.4",  mktcap: "$1.52T", hist: [404.1,417.3,417.9,426,433.6,440.4,442.1,435.8,415.9,423.7,423.7,418.5,391,409,396.7,381.6,399.2,406.4,411.2,404.7] },
+    { ticker: "BRK.B", name: "Berkshire Hathaway",  price: 494.95, day: "-0.12", month: "+2.5",  year: "+1.5",   mktcap: "$1.07T", hist: [480.5,480.9,480,486.4,483.6,479.9,477.4,474.5,470.3,471.5,475.4,478.6,488.1,487,487.8,483.7,485.8,489.3,495.5,495] },
+    { ticker: "JPM",   name: "JPMorgan Chase",      price: 331.14, day: "+3.68", month: "+11.2", year: "+25.0",  mktcap: "$887B", hist: [295.7,302,303,306.4,306.7,299.3,296.7,299.3,296.6,301,300.9,310.9,312.4,311.1,312.7,309.1,313.5,320.7,319.4,331.1] }
   ],
 
   /* ---------- COMMODITIES ---------- */
