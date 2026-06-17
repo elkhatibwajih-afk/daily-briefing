@@ -15,6 +15,9 @@ window.DASHBOARD_DATA = {
   asOfNote: "Stocks & indices: Tue Jun 16 close · commodities, FX, rates & crypto: Jun 16–17 · the FOMC rate decision is due ~2pm ET today (Jun 17).",
   drivingStory: "All eyes on the Fed: Chair Kevin Warsh delivers his first rate decision today (~2pm ET) — a hold at 3.50–3.75% is near-certain, but markets expect a hawkish 'fewer cuts' dot plot. The Dow hit a record near 52,000 even as tech slipped, and oil kept sliding (WTI ~$75) ahead of Friday's US–Iran deal signing. Days after its record IPO, SpaceX agreed to buy Cursor-maker Anysphere for ~$60B.",
 
+  /* Short labels for the most recent trading sessions (oldest → newest), used as the index-chart x-axis & hover dates. NYSE calendar; ends at the latest US close. */
+  histDates: ["May 18","May 19","May 20","May 21","May 22","May 26","May 27","May 28","May 29","Jun 1","Jun 2","Jun 3","Jun 4","Jun 5","Jun 8","Jun 9","Jun 10","Jun 11","Jun 12","Jun 15","Jun 16"],
+
   /* ---------- MARKETS ---------- */
   markets: {
 
