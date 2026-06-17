@@ -199,6 +199,25 @@
   }
   .rtag.leb{background:rgba(217,177,96,.18);color:var(--gold)}
 
+  /* sub-headings */
+  .sub-h{font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700;margin:24px 0 12px}
+
+  /* week-ahead calendar */
+  .cal-item{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:11px 2px;border-bottom:1px solid var(--border)}
+  .cal-item:last-child{border-bottom:none}
+  .cal-item:hover{background:var(--panel2)}
+  .cal-date{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--gold);padding-top:1px}
+  .cal-cat{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-right:8px;vertical-align:middle}
+  .cal-ev .ev{font-size:13.5px;font-weight:600;line-height:1.45;color:var(--text)}
+  .cal-ev p{font-size:12px;color:var(--muted);line-height:1.45;margin-top:3px}
+
+  /* stat cards (Lebanon economy) */
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:6px}
+  .stat{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--border);border-radius:11px;padding:12px 14px}
+  .stat .lbl{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+  .stat .val{font-family:var(--mono);font-size:18px;font-weight:600;letter-spacing:-.3px}
+  .stat .sub{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35}
+
   /* Footer */
   footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.7}
   footer .disc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:14px}
@@ -212,6 +231,7 @@
     .brand .meta{text-align:left}
     .news{grid-template-columns:1fr}
     .news .cat{justify-self:start;padding:4px 12px}
+    .cal-item{grid-template-columns:62px 1fr;gap:10px}
   }
 </style>
 </head>
@@ -235,6 +255,7 @@
 <nav class="sub">
   <div class="wrap">
     <a href="#markets">Markets</a>
+    <a href="#weekahead">Week Ahead</a>
     <a href="#stocks">Big Stocks</a>
     <a href="#commodities">Commodities</a>
     <a href="#news">Financial News</a>
@@ -253,6 +274,13 @@
       <div class="card mini"><h3>FX</h3><div id="fx"></div></div>
       <div class="card mini"><h3>Crypto</h3><div id="crypto"></div></div>
     </div>
+    <h3 class="sub-h">Regional Markets — GCC &amp; Egypt</h3>
+    <div class="grid idx-grid" id="regional"></div>
+  </section>
+
+  <section id="weekahead">
+    <div class="sec-head"><span class="bar"></span><h2>Week Ahead</h2><span class="count">scheduled catalysts &amp; events</span></div>
+    <div id="weekahead-list"></div>
   </section>
 
   <section id="stocks">
@@ -294,6 +322,10 @@
 
   <section id="politics">
     <div class="sec-head"><span class="bar"></span><h2>Politics</h2></div>
+    <div class="leb-econ-wrap">
+      <h3 class="sub-h">🇱🇧 Lebanon — Economy at a glance</h3>
+      <div class="stat-grid" id="leb-econ"></div>
+    </div>
     <div class="pol-cols">
       <div class="pol-col">
         <h3><span class="fl">🌍</span> Middle East</h3>
@@ -369,6 +401,20 @@ function startDashboard(){
     '</div>';
   }).join('') || '<div class="empty">No index data.</div>';
 
+  // ---- regional markets ----
+  $('regional').innerHTML = (D.regionalMarkets||[]).map(function(x){
+    return '<div class="card">'+
+      '<div class="idx-name"><span>'+esc(x.name)+'</span></div>'+
+      '<div class="idx-level">'+fmt(x.level,2)+'</div>'+
+      '<div class="idx-row">'+
+        '<div class="it"><span class="k">1D</span><span class="v '+pct(x.day).c+'">'+pct(x.day).t+'</span></div>'+
+        '<div class="it"><span class="k">1M</span><span class="v '+pct(x.month).c+'">'+pct(x.month).t+'</span></div>'+
+        '<div class="it"><span class="k">YTD</span><span class="v '+pct(x.ytd).c+'">'+pct(x.ytd).t+'</span></div>'+
+      '</div>'+
+      (x.note?'<div class="note">'+esc(x.note)+'</div>':'')+
+    '</div>';
+  }).join('') || '<div class="empty">No regional data.</div>';
+
   // ---- rates / fx / crypto ----
   $('rates').innerHTML = (M.rates||[]).map(function(x){
     return '<div class="mini-row"><div class="n">'+esc(x.name)+(x.sub?'<small>'+esc(x.sub)+'</small>':'')+'</div>'+
@@ -384,6 +430,25 @@ function startDashboard(){
     return '<div class="mini-row"><div class="n">'+esc(x.name)+'</div>'+
       '<div class="vals"><div class="p">$'+fmt(x.price,0)+'</div><div class="c '+pct(x.day).c+'">'+pct(x.day).t+' · 1Y '+pct(x.year).t+'</div></div></div>';
   }).join('') || '<div class="note">No data.</div>';
+
+  // ---- week ahead ----
+  function calCat(c){
+    c=(c||'').toLowerCase();
+    if(c.indexOf('central')>=0||c.indexOf('bank')>=0) return 'cat-capital';
+    if(c.indexOf('earn')>=0) return 'cat-earnings';
+    if(c.indexOf('ipo')>=0) return 'cat-ipo';
+    if(c.indexOf('geo')>=0||c.indexOf('politic')>=0||c.indexOf('event')>=0) return 'cat-deal';
+    if(c.indexOf('econ')>=0||c.indexOf('macro')>=0||c.indexOf('data')>=0) return 'cat-macro';
+    return 'cat-global';
+  }
+  $('weekahead-list').innerHTML = (D.weekAhead||[]).map(function(x){
+    return '<div class="cal-item">'+
+      '<div class="cal-date">'+esc(x.date)+'</div>'+
+      '<div class="cal-ev"><div class="ev"><span class="cal-cat '+calCat(x.category)+'">'+esc(x.category||'')+'</span>'+esc(x.event)+'</div>'+
+        (x.detail?'<p>'+esc(x.detail)+'</p>':'')+
+      '</div>'+
+    '</div>';
+  }).join('') || '<div class="empty">No upcoming events.</div>';
 
   // ---- stocks ----
   $('stocks-body').innerHTML = (D.stocks||[]).map(function(x){
@@ -451,6 +516,11 @@ function startDashboard(){
       '<div class="src">'+link(x.url,x.source||'source')+(x.date?' · <span class="dt">'+esc(x.date)+'</span>':'')+'</div>'+
       '</div></div>';
   }).join('') || '<div class="empty">No items.</div>';
+
+  // ---- lebanon economy ----
+  $('leb-econ').innerHTML = (D.lebanonEconomy||[]).map(function(x){
+    return '<div class="stat"><div class="lbl">'+esc(x.label)+'</div><div class="val">'+esc(x.value)+'</div>'+(x.sub?'<div class="sub">'+esc(x.sub)+'</div>':'')+'</div>';
+  }).join('') || '<div class="note">No data.</div>';
 
   // ---- politics ----
   const P = D.politics||{};
