@@ -271,8 +271,10 @@
   .sess.open .sess-status .sdot{background:var(--up);box-shadow:0 0 8px var(--up)}
 
   /* geopolitical map */
-  .map-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#0b1018;box-shadow:var(--shadow)}
-  #map-svg svg{display:block;width:100%;height:auto}
+  .map-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#0e1622,#05070b);box-shadow:var(--shadow);min-height:480px;display:flex;align-items:center;justify-content:center}
+  #globe-viz{width:100%;cursor:grab}
+  #globe-viz:active{cursor:grabbing}
+  #globe-viz canvas{display:block;margin:0 auto;outline:none}
   .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--muted);align-items:center}
   .map-legend .lg{display:inline-flex;align-items:center;gap:6px}
   .map-legend .lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
@@ -419,8 +421,8 @@
   </section>
 
   <section id="worldmap">
-    <div class="sec-head"><span class="bar"></span><h2>Geopolitical Map of the Day</h2><span class="count">today's hotspots — pulsing by importance</span></div>
-    <div class="map-wrap"><div id="map-svg"></div></div>
+    <div class="sec-head"><span class="bar"></span><h2>Geopolitical Map of the Day</h2><span class="count">interactive globe · drag to rotate · scroll to zoom</span></div>
+    <div class="map-wrap"><div id="globe-viz"></div></div>
     <div class="map-legend" id="map-legend"></div>
   </section>
 
@@ -815,38 +817,39 @@ function startDashboard(){
     render(); setInterval(render,1000);
   })();
 
-  // ---- geopolitical map of the day ----
+  // ---- interactive globe (geopolitical map of the day) ----
   (function(){
-    var host=$('map-svg'); if(!host) return;
+    var host=$('globe-viz'); if(!host) return;
     var pts=(D.mapPoints||[]);
     if(!pts.length){ var s=$('worldmap'); if(s) s.style.display='none'; return; }
-    var W=1000,H=500;
-    function X(lng){return (lng+180)/360*W;}
-    function Y(lat){return (90-lat)/180*H;}
     var colors={Lebanon:'#d9b160',Iran:'#f0616d','Israel-Gaza':'#f0616d',Gulf:'#1ec885',US:'#5b8cff',Syria:'#b39bff',Regional:'#8b93a8'};
-    var continents='<g fill="#33415c" opacity="0.16" filter="url(#mb)">'+
-      '<path d="M150,90 L230,75 L300,100 L295,140 L250,170 L300,175 L260,210 L205,205 L165,165 L130,140 L125,110 Z"/>'+
-      '<path d="M280,250 L330,265 L335,315 L300,400 L282,430 L268,360 L262,300 Z"/>'+
-      '<path d="M475,100 L560,90 L575,120 L535,150 L495,160 L472,130 Z"/>'+
-      '<path d="M490,175 L600,170 L615,250 L560,355 L515,375 L498,290 L478,225 Z"/>'+
-      '<path d="M575,85 L770,70 L880,95 L900,140 L820,175 L760,165 L660,180 L605,150 L575,120 Z"/>'+
-      '<path d="M800,330 L890,325 L905,365 L835,395 L800,370 Z"/></g>';
-    var grat='<g stroke="#1b2535" stroke-width="1">',lng,lat;
-    for(lng=-150;lng<=150;lng+=30){ grat+='<line x1="'+X(lng).toFixed(1)+'" y1="0" x2="'+X(lng).toFixed(1)+'" y2="'+H+'"/>'; }
-    for(lat=-60;lat<=60;lat+=30){ grat+='<line x1="0" y1="'+Y(lat).toFixed(1)+'" x2="'+W+'" y2="'+Y(lat).toFixed(1)+'"/>'; }
-    grat+='</g>';
-    var arcs=(D.mapArcs||[]).map(function(a){ var x1=X(a.from[1]),y1=Y(a.from[0]),x2=X(a.to[1]),y2=Y(a.to[0]); var mx=(x1+x2)/2,my=(y1+y2)/2-Math.abs(x2-x1)*0.16-18;
-      return '<path d="M'+x1.toFixed(1)+' '+y1.toFixed(1)+' Q'+mx.toFixed(1)+' '+my.toFixed(1)+' '+x2.toFixed(1)+' '+y2.toFixed(1)+'" fill="none" stroke="#d9b160" stroke-width="1.1" opacity="0.45" stroke-dasharray="3 5"/>'; }).join('');
-    var markers=pts.map(function(p){ var x=X(p.lng).toFixed(1),y=Y(p.lat).toFixed(1),r=4+(p.weight||1)*2,c=colors[p.region]||'#5b8cff';
-      return '<g><title>'+esc(p.place)+' — '+esc(p.label||'')+'</title>'+
-        '<circle cx="'+x+'" cy="'+y+'" r="'+(r*1.6).toFixed(1)+'" fill="'+c+'" opacity="0.16"><animate attributeName="r" values="'+(r*1.5).toFixed(1)+';'+(r*3.2).toFixed(1)+';'+(r*1.5).toFixed(1)+'" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.22;0.02;0.22" dur="3s" repeatCount="indefinite"/></circle>'+
-        '<circle cx="'+x+'" cy="'+y+'" r="'+r.toFixed(1)+'" fill="'+c+'"/>'+
-        '<circle cx="'+x+'" cy="'+y+'" r="'+r.toFixed(1)+'" fill="none" stroke="#ffffff" stroke-width="0.7" opacity="0.55"/></g>'; }).join('');
-    var labels=pts.map(function(p){ if((p.weight||1)<3) return ''; var x=X(p.lng),y=Y(p.lat),end=x>W-170,tx=(end?x-9:x+9).toFixed(1);
-      return '<text x="'+tx+'" y="'+(y+3.5).toFixed(1)+'" fill="#e8ebf2" font-size="12.5" font-weight="600" font-family="-apple-system,Segoe UI,sans-serif" text-anchor="'+(end?'end':'start')+'">'+esc(p.place)+'</text>'; }).join('');
-    host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto"><defs><filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter><radialGradient id="mbg" cx="50%" cy="38%" r="78%"><stop offset="0%" stop-color="#0e1622"/><stop offset="100%" stop-color="#080b12"/></radialGradient></defs><rect width="'+W+'" height="'+H+'" fill="url(#mbg)"/>'+continents+grat+arcs+markers+labels+'</svg>';
+    var rgb={Lebanon:'217,177,96',Iran:'240,97,109','Israel-Gaza':'240,97,109',Gulf:'30,200,133',US:'91,140,255',Syria:'179,155,255',Regional:'139,147,168'};
     var seen={},leg=[]; pts.forEach(function(p){ if(!seen[p.region]){seen[p.region]=1;leg.push(p.region);} });
-    var lh=$('map-legend'); if(lh) lh.innerHTML=leg.map(function(rg){return '<span class="lg"><i style="background:'+(colors[rg]||'#5b8cff')+'"></i>'+esc(rg)+'</span>';}).join('')+'<span class="lg" style="margin-left:auto;opacity:.75">dot size = importance · gold arcs link related events</span>';
+    var lh=$('map-legend'); if(lh) lh.innerHTML=leg.map(function(r){return '<span class="lg"><i style="background:'+(colors[r]||'#5b8cff')+'"></i>'+esc(r)+'</span>';}).join('')+'<span class="lg" style="margin-left:auto;opacity:.75">drag to rotate · scroll to zoom · hover a marker</span>';
+    function fail(){ host.innerHTML='<div class="empty" style="margin:40px 20px">Couldn\'t load the 3D globe — it needs an internet connection. Everything else on the dashboard works offline.</div>'; }
+    function init(){
+      if(!window.Globe){ fail(); return; }
+      var arcsData=(D.mapArcs||[]).map(function(a){return {startLat:a.from[0],startLng:a.from[1],endLat:a.to[0],endLng:a.to[1]};});
+      var g=Globe()(host)
+        .width(host.clientWidth||900).height(480)
+        .backgroundColor('rgba(0,0,0,0)')
+        .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+        .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+        .showAtmosphere(true).atmosphereColor('#5b8cff').atmosphereAltitude(0.16)
+        .pointsData(pts).pointLat('lat').pointLng('lng')
+        .pointColor(function(p){return colors[p.region]||'#5b8cff';})
+        .pointAltitude(function(p){return 0.03+(p.weight||1)*0.05;})
+        .pointRadius(function(p){return 0.2+(p.weight||1)*0.1;})
+        .pointLabel(function(p){return '<div style="font-family:-apple-system,Segoe UI,sans-serif;background:rgba(10,13,20,.94);border:1px solid #333c54;border-radius:9px;padding:8px 11px;max-width:230px;box-shadow:0 6px 20px rgba(0,0,0,.5)"><div style="font-weight:700;font-size:13px;color:#fff"><span style="color:'+(colors[p.region]||'#5b8cff')+'">●</span> '+esc(p.place)+'</div><div style="font-size:12px;color:#b9c0d0;margin-top:3px;line-height:1.4">'+esc(p.label||'')+'</div></div>';})
+        .ringsData(pts).ringLat('lat').ringLng('lng').ringMaxRadius(function(p){return 2+(p.weight||1);}).ringPropagationSpeed(1.3).ringRepeatPeriod(1500).ringColor(function(p){var c=rgb[p.region]||'91,140,255';return function(t){return 'rgba('+c+','+(1-t)+')';};})
+        .labelsData(pts.filter(function(p){return (p.weight||1)>=2;})).labelLat('lat').labelLng('lng').labelText('place').labelSize(0.85).labelDotRadius(0).labelColor(function(){return 'rgba(232,235,242,0.9)';}).labelResolution(2)
+        .arcsData(arcsData).arcColor(function(){return ['rgba(217,177,96,0.95)','rgba(217,177,96,0.25)'];}).arcStroke(0.55).arcDashLength(0.5).arcDashGap(0.22).arcDashAnimateTime(2200);
+      g.pointOfView({lat:29,lng:26,altitude:2.4},0);
+      var c=g.controls(); c.autoRotate=true; c.autoRotateSpeed=0.5; c.enableZoom=true; c.minDistance=160; c.maxDistance=520;
+      window.addEventListener('resize',function(){ g.width(host.clientWidth||900); });
+    }
+    if(window.Globe){ init(); }
+    else { var sc=document.createElement('script'); sc.src='https://unpkg.com/globe.gl@2'; sc.onload=init; sc.onerror=fail; document.head.appendChild(sc); }
   })();
 }
 
