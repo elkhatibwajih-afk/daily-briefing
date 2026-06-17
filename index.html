@@ -239,6 +239,16 @@
   .hm-tile .hm-tkr{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--text);line-height:1.2}
   .hm-tile .hm-val{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--text)}
 
+  /* listen button */
+  .listen-btn{margin-top:14px;background:linear-gradient(90deg,var(--accent2),var(--accent));color:#fff;border:none;border-radius:24px;padding:10px 18px;font-family:var(--sans);font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow);transition:.15s}
+  .listen-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .listen-btn.playing{background:linear-gradient(90deg,var(--down),#c0392b)}
+
+  /* sparklines */
+  .spark{display:inline-block;vertical-align:middle}
+  .idx-spark{margin-top:9px}
+  .idx-spark .spark{width:100%;height:30px;display:block;opacity:.92}
+
   /* Footer */
   footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;line-height:1.7}
   footer .disc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:14px}
@@ -270,6 +280,7 @@
       <span class="lbl">What's moving</span>
       <span class="txt" id="m-driver"></span>
     </div>
+    <button id="listen-btn" class="listen-btn">🔊 Listen to today's briefing</button>
   </div>
 </header>
 
@@ -330,7 +341,7 @@
     <div class="tbl-wrap">
       <table>
         <thead><tr>
-          <th class="l">Ticker</th><th class="l">Company</th><th>Price</th>
+          <th class="l">Ticker</th><th class="l">Company</th><th>Price</th><th>Trend</th>
           <th>1&nbsp;Day</th><th>1&nbsp;Month</th><th>1&nbsp;Year</th><th>Mkt&nbsp;Cap</th>
         </tr></thead>
         <tbody id="stocks-body"></tbody>
@@ -420,6 +431,13 @@ function startDashboard(){
   }
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
   function link(url,text){return url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(text)+'</a>':esc(text);}
+  function sparkline(hist,w,h){
+    if(!hist||hist.length<2) return '';
+    var mn=Math.min.apply(null,hist), mx=Math.max.apply(null,hist), rg=(mx-mn)||1, n=hist.length;
+    var pts=hist.map(function(v,i){ var x=(i/(n-1))*(w-2)+1; var y=h-1.5-((v-mn)/rg)*(h-3); return x.toFixed(1)+','+y.toFixed(1); }).join(' ');
+    var col = hist[n-1]>=hist[0] ? 'var(--up)' : 'var(--down)';
+    return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none"><polyline points="'+pts+'" fill="none" stroke="'+col+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  }
 
   // ---- header ----
   $('m-date').textContent = D.dateLabel || D.lastUpdated || '';
@@ -439,6 +457,7 @@ function startDashboard(){
         '<div class="it"><span class="k">1M</span><span class="v '+pct(x.month).c+'">'+pct(x.month).t+'</span></div>'+
         '<div class="it"><span class="k">YTD</span><span class="v '+pct(x.ytd).c+'">'+pct(x.ytd).t+'</span></div>'+
       '</div>'+
+      (x.hist?'<div class="idx-spark">'+sparkline(x.hist,200,30)+'</div>':'')+
       (x.note?'<div class="note">'+esc(x.note)+'</div>':'')+
     '</div>';
   }).join('') || '<div class="empty">No index data.</div>';
@@ -453,6 +472,7 @@ function startDashboard(){
         '<div class="it"><span class="k">1M</span><span class="v '+pct(x.month).c+'">'+pct(x.month).t+'</span></div>'+
         '<div class="it"><span class="k">YTD</span><span class="v '+pct(x.ytd).c+'">'+pct(x.ytd).t+'</span></div>'+
       '</div>'+
+      (x.hist?'<div class="idx-spark">'+sparkline(x.hist,200,30)+'</div>':'')+
       (x.note?'<div class="note">'+esc(x.note)+'</div>':'')+
     '</div>';
   }).join('') || '<div class="empty">No regional data.</div>';
@@ -498,12 +518,13 @@ function startDashboard(){
       '<td class="tkr">'+esc(x.ticker)+'</td>'+
       '<td class="co">'+esc(x.name)+'</td>'+
       '<td>$'+fmt(x.price,2)+'</td>'+
+      '<td class="spark-cell">'+(sparkline(x.hist,90,26)||'<span class="flat">—</span>')+'</td>'+
       '<td>'+pill(x.day)+'</td>'+
       '<td>'+colored(x.month)+'</td>'+
       '<td>'+colored(x.year)+'</td>'+
       '<td>'+esc(x.mktcap||'—')+'</td>'+
     '</tr>';
-  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--muted)">No stock data.</td></tr>';
+  }).join('') || '<tr><td colspan="8" style="text-align:center;color:var(--muted)">No stock data.</td></tr>';
 
   // ---- commodities ----
   $('comm-body').innerHTML = (D.commodities||[]).map(function(x){
@@ -628,6 +649,62 @@ function startDashboard(){
     }
     bind('hm-set','set'); bind('hm-metric','metric');
     draw();
+  })();
+
+  // ---- listen to briefing (text-to-speech) ----
+  (function(){
+    var btn=$('listen-btn'); if(!btn) return;
+    if(!('speechSynthesis' in window)){ btn.style.display='none'; return; }
+    function clean(s){
+      return String(s||'')
+        .replace(/~/g,'about ')
+        .replace(/\$(\d+(?:\.\d+)?)\s*[Tt]\b/g,'$1 trillion dollars')
+        .replace(/\$(\d+(?:\.\d+)?)\s*[Bb]\b/g,'$1 billion dollars')
+        .replace(/\$(\d+(?:\.\d+)?)\s*[Mm]\b/g,'$1 million dollars')
+        .replace(/\$(\d[\d,]*(?:\.\d+)?)/g,'$1 dollars')
+        .replace(/%/g,' percent').replace(/&/g,' and ').replace(/[–—]/g,', ')
+        .replace(/\s+/g,' ').trim();
+    }
+    function moveWord(v){
+      if(v==null||v==='n/a') return '';
+      var n=parseFloat(String(v).replace(/[+%]/g,'')); if(isNaN(n)) return '';
+      if(Math.abs(n)<0.05) return 'was roughly flat';
+      return (n>0?'rose ':'fell ')+Math.abs(n).toFixed(2).replace(/\.?0+$/,'')+' percent';
+    }
+    function build(){
+      var p=[]; p.push('Here is your daily briefing for '+(D.dateLabel||'today')+'.');
+      if(D.drivingStory) p.push(clean(D.drivingStory));
+      var idx=((D.markets||{}).indices)||[];
+      function fi(nm){ for(var i=0;i<idx.length;i++){ if((idx[i].name||'').indexOf(nm)>=0) return idx[i]; } return null; }
+      var sp=fi('S&P'), nq=fi('Nasdaq Composite'), dw=fi('Dow'), ms=[];
+      if(sp&&moveWord(sp.day)) ms.push('the S and P 500 '+moveWord(sp.day));
+      if(nq&&moveWord(nq.day)) ms.push('the Nasdaq '+moveWord(nq.day));
+      if(dw&&moveWord(dw.day)) ms.push('the Dow '+moveWord(dw.day));
+      if(ms.length) p.push('In U.S. markets, '+ms.join(', ')+'.');
+      var st=(D.stocks||[]).filter(function(x){return x.day&&x.day!=='n/a'&&!isNaN(parseFloat(x.day));});
+      if(st.length){ st.sort(function(a,b){return Math.abs(parseFloat(b.day))-Math.abs(parseFloat(a.day));}); p.push('The biggest mover among the megacaps was '+clean(st[0].name)+', which '+moveWord(st[0].day)+'.'); }
+      var com=(D.commodities||[]); function fc(nm){for(var i=0;i<com.length;i++){if((com[i].name||'').indexOf(nm)>=0)return com[i];}return null;}
+      var wti=fc('WTI'), gold=fc('Gold'), cs=[];
+      if(wti&&moveWord(wti.day)) cs.push('oil '+moveWord(wti.day));
+      if(gold&&moveWord(gold.day)) cs.push('gold '+moveWord(gold.day));
+      if(cs.length) p.push('In commodities, '+cs.join(' and ')+'.');
+      var news=(D.financialNews||[]).slice(0,3).map(function(x){return clean(x.headline);});
+      if(news.length) p.push('Today\'s top financial stories. '+news.join('. ')+'.');
+      var me=((D.politics||{}).middleEast)||[]; var pol=me.slice(0,2).map(function(x){return clean(x.headline);});
+      if(pol.length) p.push('In the Middle East. '+pol.join('. ')+'.');
+      p.push('That is your briefing. Have a great day.');
+      return p.join(' ');
+    }
+    var on=false, label='🔊 Listen to today\'s briefing';
+    function reset(){ on=false; btn.innerHTML=label; btn.classList.remove('playing'); }
+    btn.addEventListener('click',function(){
+      if(on){ window.speechSynthesis.cancel(); reset(); return; }
+      var u=new SpeechSynthesisUtterance(build()); u.rate=1; u.pitch=1;
+      u.onend=reset; u.onerror=reset;
+      window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
+      on=true; btn.innerHTML='⏸ Stop'; btn.classList.add('playing');
+    });
+    window.addEventListener('beforeunload',function(){ try{window.speechSynthesis.cancel();}catch(e){} });
   })();
 }
 
