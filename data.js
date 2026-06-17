@@ -49,6 +49,33 @@ window.DASHBOARD_DATA = {
     ]
   },
 
+  /* ---------- REGIONAL MARKETS (GCC & Egypt) ---------- */
+  regionalMarkets: [
+    { name: "Saudi · TASI",        level: 11101.16, day: "-0.40", month: "+1.32", ytd: "+5.82" },
+    { name: "Abu Dhabi · ADX",     level: 9962.26,  day: "-0.01", month: "+4.19", ytd: "-0.30" },
+    { name: "Dubai · DFM",         level: 6054.98,  day: "+1.70", month: "n/a",   ytd: "n/a", note: "1M / YTD n/a — clean year-end base unavailable (DFM rose ~17% in 2025)." },
+    { name: "Qatar · QE",          level: 10585.98, day: "+0.33", month: "+0.97", ytd: "+2.30" },
+    { name: "Kuwait · All-Share",  level: 8835.90,  day: "-0.04", month: "+1.58", ytd: "-0.81" },
+    { name: "Bahrain · All-Share", level: 2000.23,  day: "+0.42", month: "+4.19", ytd: "+5.03" },
+    { name: "Oman · MSX 30",       level: 7618.29,  day: "-0.68", month: "+3.84", ytd: "+29.9" },
+    { name: "Egypt · EGX 30",      level: 52328.21, day: "+0.33", month: "+0.62", ytd: "+25.1" }
+  ],
+
+  /* ---------- WEEK AHEAD (scheduled catalysts) ---------- */
+  weekAhead: [
+    { date: "Wed Jun 17", category: "Central Bank", event: "FOMC decision + Warsh's first press conference", detail: "Hold expected at 3.50–3.75% (~97% odds); the new Chair's tone and Fed-independence signals are the real event." },
+    { date: "Thu Jun 18", category: "Central Bank", event: "Bank of England rate decision", detail: "Expected to hold at 3.75%; focus on soft inflation vs. Middle East energy risk." },
+    { date: "Thu Jun 18", category: "IPO", event: "IPOs price: Kardigan & First Carolina Financial", detail: "Kardigan (~$350M, Nasdaq) and First Carolina (~$83M, NYSE)." },
+    { date: "Fri Jun 19", category: "Geopolitics", event: "US–Iran peace deal signing, Geneva", detail: "MoU launching 60-day nuclear/sanctions talks and the Strait of Hormuz reopening — a major oil catalyst." },
+    { date: "Mon Jun 22", category: "Geopolitics", event: "Lebanon–Israel talks resume (week of Jun 22)", detail: "Political and security tracks reconvene toward a comprehensive agreement; exact day unannounced." },
+    { date: "~Tue Jun 23", category: "Econ", event: "Flash PMIs — US, Eurozone, UK (June)", detail: "First June activity read after the Middle-East escalation (date approximate)." },
+    { date: "Tue Jun 23", category: "Earnings", event: "FedEx Q4 (after close)", detail: "Bellwether for global shipping and freight demand." },
+    { date: "Wed Jun 24", category: "Earnings", event: "Micron FQ3 (after close)", detail: "Key AI / memory-demand gauge — HBM and DRAM pricing." },
+    { date: "Wed Jun 24", category: "Earnings", event: "Paychex Q4 (before open)", detail: "A read on small-business hiring and payrolls." },
+    { date: "Thu Jun 25", category: "Econ", event: "US data: final Q1 GDP, durable goods, jobless claims", detail: "Growth confirmation, a capex signal, and a high-frequency labor read (8:30am ET)." },
+    { date: "Fri Jun 26", category: "Econ", event: "US PCE inflation (May) + income & spending", detail: "The Fed's preferred inflation gauge — the week's marquee US data point." }
+  ],
+
   /* ---------- BIG STOCKS (largest by market cap) ---------- */
   /* Price & 1-day = Tue Jun 16 close · 1M / 1Y = trailing price return */
   stocks: [
@@ -192,6 +219,18 @@ window.DASHBOARD_DATA = {
     { region: "Global", headline: "AI IPO era opens: Anthropic files to go public; OpenAI closes $122B round",
       summary: "Anthropic filed to go public (reported ~$965B valuation) while OpenAI closed a $122B round at an $852B valuation ahead of a planned late-2026 listing — the marquee global AI capital-markets story of the period.",
       source: "Crunchbase News", url: "https://news.crunchbase.com/venture/unicorn-valuation-escalation-ai-space-tech-robotics/", date: "Jun 2026" }
+  ],
+
+  /* ---------- LEBANON ECONOMY ---------- */
+  lebanonEconomy: [
+    { label: "Lira / USD",         value: "~89,500",     sub: "Official & parallel rate — now unified and stable" },
+    { label: "Inflation (y/y)",    value: "20.0%",       sub: "April 2026 — a 19-month high, re-accelerating" },
+    { label: "BdL FX Reserves",    value: "~$11.5B",     sub: "Mid-May 2026, down from $11.9B in February" },
+    { label: "Eurobonds",          value: "~25–27¢",     sub: "Cents on the dollar; in default since 2020" },
+    { label: "IMF Program",        value: "Stalled",     sub: "Staff-level since 2022; the 'Gap Law' is contested in parliament" },
+    { label: "GDP Growth",         value: "+4.0%",       sub: "2026 World Bank forecast (was +3.5% in 2025)" },
+    { label: "Public Debt",        value: "155% of GDP", sub: "2025 — still unsustainable" },
+    { label: "Bank-System Losses", value: "~$80–83B",    sub: "The 'gap'; over $100B of deposits frozen" }
   ],
 
   /* ---------- POLITICS ---------- */
