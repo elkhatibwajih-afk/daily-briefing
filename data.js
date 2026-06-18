@@ -262,17 +262,17 @@ window.DASHBOARD_DATA = {
   politics: {
 
     middleEast: [
-      { region: "Lebanon", headline: "Trump and Netanyahu openly at odds over Israeli withdrawal from Lebanon",
-        summary: "At his June 17 G7 press conference, Trump acknowledged friction with Netanyahu over Lebanon — saying the PM 'gets a little excited' and that he was 'not happy' with Israel's conduct — as the deal requires fighting in Lebanon to end.",
-        source: "Times of Israel", url: "https://www.timesofisrael.com/liveblog-june-17-2026/", date: "Jun 17, 2026" },
+      { region: "Lebanon", headline: "Trump and Netanyahu clash over an Israeli withdrawal from Lebanon",
+        summary: "At the G7, Trump aired open friction with Netanyahu over Lebanon — calling a deadly Israeli strike 'vicious' and urging Israel to be 'more responsible,' while declaring 'there would be no Israel' without him. The US–Iran deal requires the fighting in Lebanon to end, but Israel is resisting.",
+        source: "CBS News", url: "https://www.cbsnews.com/live-updates/iran-war-us-deal-peace-israel-lebanon-hezbollah-strait-of-hormuz/", date: "Jun 17, 2026" },
 
       { region: "Lebanon", headline: "Israel says it won't withdraw from south Lebanon despite the Iran deal",
-        summary: "Defense Minister Israel Katz said the IDF will remain in southern Lebanon 'despite all the existing pressures,' and ministers said Israel won't be bound by the US–Iran agreement — directly contradicting the deal's Lebanon provisions.",
-        source: "Times of Israel", url: "https://www.timesofisrael.com/israel-vows-to-stay-in-south-lebanon-if-iran-strikes-well-hit-it-with-full-force/", date: "Jun 16, 2026" },
+        summary: "Defense Minister Israel Katz and Israel's ambassador to the US both said Israel will not withdraw from southern Lebanon 'despite all the existing pressures,' and Netanyahu said troops will stay 'as long as necessary' — directly contradicting Iran's reading that the deal requires an Israeli withdrawal.",
+        source: "NPR", url: "https://www.npr.org/2026/06/16/nx-s1-5858937/israels-ambassador-to-the-u-s-talks-about-u-s-iran-deal-to-end-war", date: "Jun 16, 2026" },
 
-      { region: "Lebanon", headline: "Fighting continues in south Lebanon; ~28 killed in 24 hours",
-        summary: "Israel tried to capture Ali al-Taher hill near Nabatieh on June 17, with Hezbollah claiming to repel it; Lebanon's health ministry reported at least 28 killed in the prior day (cumulative ~3,826), while the IDF said Hezbollah drones wounded five soldiers.",
-        source: "Times of Israel", url: "https://www.timesofisrael.com/amid-us-iran-deal-idf-says-hezbollah-continues-attacking-troops-in-south-lebanon/", date: "Jun 17, 2026" },
+      { region: "Lebanon", headline: "Fighting rages in south Lebanon as strikes continue despite the deal",
+        summary: "Israeli forces tried to seize the strategic Ali al-Taher hill southeast of Nabatieh under heavy air and artillery cover; Hezbollah said it repelled the advance, using guided missiles against Merkava tanks and firing rockets toward Israeli positions. Israeli air strikes on Lebanon continued, threatening the US–Iran deal.",
+        source: "Al Jazeera", url: "https://www.aljazeera.com/news/2026/6/17/israeli-air-strikes-on-lebanon-continue-threatening-us-iran-deal", date: "Jun 17, 2026" },
 
       { region: "Lebanon", headline: "Lebanon's war toll mounts; reconstruction needs in the billions",
         summary: "Bank Audi projects 0% GDP growth in 2026 if the war continues; the World Bank estimates ~$14B in damage and losses (incl. ~$11B reconstruction), with over a million displaced and ~1.24M facing food insecurity.",
