@@ -275,9 +275,9 @@
 
   /* geopolitical map */
   .map-wrap{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 38%,#0e1622,#05070b);box-shadow:var(--shadow);min-height:480px;display:flex;align-items:center;justify-content:center}
-  #globe-viz{width:100%;cursor:grab}
+  #globe-viz{width:100%;cursor:grab;touch-action:none}
   #globe-viz:active{cursor:grabbing}
-  #globe-viz canvas{display:block;margin:0 auto;outline:none}
+  #globe-viz canvas{display:block;margin:0 auto;outline:none;touch-action:none}
   .map-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--muted);align-items:center}
   .map-legend .lg{display:inline-flex;align-items:center;gap:6px}
   .map-legend .lg i{width:9px;height:9px;border-radius:50%;display:inline-block}
@@ -497,7 +497,7 @@ function startDashboard(){
 
   // ---- header ----
   $('m-date').textContent = D.dateLabel || D.lastUpdated || '';
-  $('m-updated').textContent = D.lastUpdated ? ('Updated '+D.lastUpdated) : '';
+  $('m-updated').textContent = D.updatedAt ? ('Updated '+D.updatedAt) : (D.lastUpdated ? ('Updated '+D.lastUpdated) : '');
   if(D.drivingStory){ $('banner').style.display='flex'; $('m-driver').textContent=D.drivingStory; }
   if(D.asOfNote) $('c-asof').textContent = D.asOfNote;
 
@@ -751,11 +751,23 @@ function startDashboard(){
       p.push('That is your briefing. Have a great day.');
       return p.join(' ');
     }
-    var on=false, label='🔊 Listen to today\'s briefing';
+    var on=false, label='🔊 Listen to today\'s briefing', preferred=null;
+    function pickVoice(){
+      var vs=window.speechSynthesis.getVoices()||[]; if(!vs.length) return null;
+      var en=vs.filter(function(v){return /^en/i.test(v.lang);}); var pool=en.length?en:vs;
+      var pri=[/natural/i,/neural/i,/online/i,/aria/i,/jenny/i,/\bguy\b/i,/\bava\b/i,/\bevan\b/i,/samantha/i,/google us english/i,/google uk english female/i];
+      for(var p=0;p<pri.length;p++){ for(var i=0;i<pool.length;i++){ if(pri[p].test(pool[i].name)) return pool[i]; } }
+      var us=pool.filter(function(v){return /en[-_]us/i.test(v.lang);}); return us[0]||pool[0]||null;
+    }
+    preferred=pickVoice();
+    try{ window.speechSynthesis.onvoiceschanged=function(){ preferred=pickVoice()||preferred; }; }catch(e){}
     function reset(){ on=false; btn.innerHTML=label; btn.classList.remove('playing'); }
     btn.addEventListener('click',function(){
       if(on){ window.speechSynthesis.cancel(); reset(); return; }
-      var u=new SpeechSynthesisUtterance(build()); u.rate=1; u.pitch=1;
+      if(!preferred) preferred=pickVoice();
+      var u=new SpeechSynthesisUtterance(build());
+      if(preferred){ u.voice=preferred; u.lang=preferred.lang; }
+      u.rate=0.97; u.pitch=1.0;
       u.onend=reset; u.onerror=reset;
       window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
       on=true; btn.innerHTML='⏸ Stop'; btn.classList.add('playing');
@@ -819,7 +831,8 @@ function startDashboard(){
       {city:'London',   flag:'🇬🇧', off:1,  open:8,    close:16.5, days:[1,2,3,4,5]},
       {city:'Tokyo',    flag:'🇯🇵', off:9,  open:9,    close:15,   days:[1,2,3,4,5]},
       {city:'Dubai',    flag:'🇦🇪', off:4,  open:10,   close:14,   days:[0,1,2,3,4]},
-      {city:'Riyadh',   flag:'🇸🇦', off:3,  open:10,   close:15,   days:[0,1,2,3,4]}
+      {city:'Riyadh',   flag:'🇸🇦', off:3,  open:10,   close:15,   days:[0,1,2,3,4]},
+      {city:'Qatar',    flag:'🇶🇦', off:3,  open:9.5,  close:13.25,days:[0,1,2,3,4]}
     ];
     function render(){
       var now=new Date();
@@ -866,7 +879,7 @@ function startDashboard(){
         .labelsData(pts.filter(function(p){return (p.weight||1)>=2;})).labelLat('lat').labelLng('lng').labelText('place').labelSize(0.85).labelDotRadius(0).labelColor(function(){return 'rgba(232,235,242,0.9)';}).labelResolution(2)
         .arcsData(arcsData).arcColor(function(){return ['rgba(217,177,96,0.95)','rgba(217,177,96,0.25)'];}).arcStroke(0.55).arcDashLength(0.5).arcDashGap(0.22).arcDashAnimateTime(2200);
       g.pointOfView({lat:29,lng:26,altitude:2.4},0);
-      var c=g.controls(); c.autoRotate=true; c.autoRotateSpeed=0.5; c.enableZoom=true; c.minDistance=160; c.maxDistance=520;
+      var c=g.controls(); c.autoRotate=false; c.enableZoom=true; c.zoomSpeed=0.9; c.minDistance=150; c.maxDistance=540;
       window.addEventListener('resize',function(){ g.width(host.clientWidth||900); });
     }
     if(window.Globe){ init(); }
