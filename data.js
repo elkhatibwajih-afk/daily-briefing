@@ -12,6 +12,7 @@ window.DASHBOARD_DATA = {
 
   dateLabel: "Thursday, June 18, 2026",
   lastUpdated: "June 18, 2026",
+  updatedAt: "June 18, 2026, 9:33 AM (Beirut)",
   asOfNote: "Stocks, indices & regional markets: Wed Jun 17 close · commodities, FX, rates & crypto: Jun 18 · US markets are closed Fri Jun 19 (Juneteenth).",
   drivingStory: "Markets sold off on a hawkish surprise from the Fed. In Kevin Warsh's debut, the FOMC held at 3.50–3.75% (12–0) but its new dot plot now signals a rate HIKE in 2026 — not the cuts markets expected — and Warsh scrapped forward guidance. The S&P fell 1.2% and the 2-year yield jumped ~16bp. Oil kept sliding (WTI ~$75) ahead of Friday's US–Iran signing in Geneva.",
 
