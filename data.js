@@ -5,325 +5,322 @@
    It is regenerated each time you run  /update-news  in Claude Code.
    You normally never edit this by hand.
 
-   Last generated: June 29, 2026
+   Last generated: October 6, 2026
+   Note: refreshed after a ~3-month pause (prior edition Jun 29);
+   the index/stock sparkline history was rebuilt from real
+   Sep 16–Oct 5 daily closes.
    ============================================================ */
 
 window.DASHBOARD_DATA = {
 
-  dateLabel: "Monday, June 29, 2026",
-  lastUpdated: "June 29, 2026",
-  updatedAt: "June 29, 2026, 8:32 AM (Beirut)",
-  asOfNote: "Monday, pre-US-open. US stocks & indices: Fri Jun 26 close (the US reopens this afternoon Beirut time — no new session yet, so the chart is unchanged). Europe: Fri Jun 26. Asia: trading Mon Jun 29 — the Nikkei slipped further (~−0.7%) while Hong Kong bounced (~+1.9%); table shows Friday's levels. Gulf: Sun Jun 28 close (UAE trades Mon–Fri, so ADX/DFM are Fri Jun 26). Commodities, FX & crypto: live Mon Jun 29 AM; rates: Fri Jun 26.",
-  drivingStory: "US futures are bouncing to start a holiday-shortened, jobs-report week (June payrolls land Thursday) as the Iran war-risk premium keeps draining — oil is steadying near ~4-month lows ahead of Sunday's OPEC+ meeting, and the dollar eased for a second session after Friday's in-line PCE. The weekend's big story is in Lebanon: the US-brokered framework deal signed Friday is already unraveling at home — Speaker Berri says it 'will not pass' and Hezbollah calls it 'null and void,' while President Aoun and PM Salam defend it as a first step to sovereignty. The ECB's Sintra forum opens today and the Supreme Court hands down major rulings later (after this snapshot), with markets still showing Friday's closes pre-US-open.",
+  dateLabel: "Tuesday, October 6, 2026",
+  lastUpdated: "October 6, 2026",
+  updatedAt: "October 6, 2026, 5:47 PM (Beirut)",
+  asOfNote: "US stocks & indices: Mon Oct 5 close (Tuesday's session is underway). Europe, Asia & Gulf: Oct 6, at/near close. Commodities, FX & crypto: live Oct 6. Rates: Oct 2 (latest FRED post). The sparkline history was rebuilt from Sep 16–Oct 5 daily closes after a ~3-month pause, so the chart shows the last ~3 weeks and will grow back toward 30 sessions.",
+  drivingStory: "US stocks are near record highs — the S&P 500 sits at 7,774 (+13.6% YTD), led by AI megacaps (Nvidia ~$5.8T; Meta +20% on the month) — even though the Fed HIKED in September to 3.75–4.00% (its first increase since 2023) and the 10-year yield has pushed near 5.3%. A soft September jobs report (+29k) has cooled bets on another hike. The dominant macro driver is geopolitical: the summer's US–Iran de-escalation collapsed back into conflict, and the resulting Strait of Hormuz disruption has pushed Brent crude back near $100. Lebanon's truce is fraying (Israel still holds ~20% of the south; the 2026 economy is now set to contract ~6%). A government shutdown was averted, and Q3 earnings season kicks off with the big banks on Oct 13.",
 
-  /* Short labels for the most recent trading sessions (oldest → newest), used as the index-chart x-axis & hover dates. NYSE calendar; ends at the latest US close (Fri Jun 26 — US reopens Mon afternoon Beirut time). */
-  histDates: ["May 19","May 20","May 21","May 22","May 26","May 27","May 28","May 29","Jun 1","Jun 2","Jun 3","Jun 4","Jun 5","Jun 8","Jun 9","Jun 10","Jun 11","Jun 12","Jun 15","Jun 16","Jun 17","Jun 18","Jun 22","Jun 23","Jun 24","Jun 25","Jun 26"],
+  /* Short labels for the most recent trading sessions (oldest → newest), used as the index-chart x-axis & hover dates. NYSE calendar; rebuilt Sep 16 → Oct 5, 2026 after the pause. */
+  histDates: ["Sep 16","Sep 17","Sep 18","Sep 21","Sep 22","Sep 23","Sep 24","Sep 25","Sep 28","Sep 29","Sep 30","Oct 1","Oct 2","Oct 5"],
 
   /* ---------- MARKETS ---------- */
   markets: {
 
     indices: [
-      { name: "S&P 500",          level: 7354.02,  day: "-0.05", month: "-2.2", ytd: "+7.4", note: "Fri Jun 26 close; futures point higher Monday on the US–Iran de-escalation.", hist: [7354,7433,7446,7473,7519,7520,7564,7580,7600,7610,7554,7584,7384,7406,7387,7267,7394,7431,7554,7511,7420,7501,7473,7365,7358,7357,7354] },
-      { name: "Nasdaq Composite", level: 25297.62, day: "-0.24", month: "-5.1", ytd: "+8.8", hist: [25871,26270,26293,26344,26656,26675,26917,26973,27087,27094,26854,26831,25709,25930,25679,25170,25810,25889,26684,26376,26022,26518,26167,25587,25477,25359,25298] },
-      { name: "Nasdaq 100",       level: 29118.24, day: "-1.09", month: "-3.0", ytd: "+15.3", note: "Fri Jun 26 close." },
-      { name: "Dow Jones",        level: 51876.11, day: "-0.09", month: "+2.8", ytd: "+8.0", hist: [49364,50009,50286,50580,50462,50644,50669,51032,51079,51308,50687,51562,50867,50786,50872,49919,50849,51202,51671,52000,51493,51565,51713,51667,51849,51921,51876] },
-      { name: "Russell 2000",     level: 3010.08,  day: "+0.07", month: "+3.0", ytd: "+21.3", note: "Crossed 3,000 for the first time (Jun 22).", hist: [2747,2817,2843,2869,2921,2920,2937,2919,2906,2932,2894,2935,2834,2855,2867,2835,2921,2944,2965,2939,2918,2980,3004,2975,2987,3008,3010] },
-      { name: "STOXX Europe 600", level: 635.88,   day: "-0.68", month: "+1.2", ytd: "+7.8", note: "Fri Jun 26 close.", hist: [621,625,632,628,628,625,626,621,625,621,624,623,622,619,619,618,622,633,634,636,637,639,639,635,635,640,636] },
-      { name: "FTSE 100",         level: 10508.02, day: "-0.21", month: "0.0", ytd: "+5.8", note: "Fri Jun 26 close.", hist: [10432,10443,10466,10491,10505,10426,10409,10339,10374,10332,10360,10368,10373,10227,10255,10304,10472,10431,10494,10478,10504,10406,10438,10429,10429,10530,10508] },
-      { name: "Nikkei 225",       level: 69360.88, day: "-4.15", month: "+6.7", ytd: "+37.8", note: "Fri Jun 26 close; slipped further to ~68,850 on Mon Jun 29. Some sites misreport YTD ~+80% (a base-date error) — true YTD ~+38%.", hist: [64996,64999,64693,66330,66310,66934,66734,68402,67471,66588,63792,64025,65417,64179,64217,66020,68463,69318,68755,69980,69902,71053,72354,69582,69384,72366,69361] },
-      { name: "Hang Seng",        level: 22671.86, day: "-1.76", month: "-10.5", ytd: "-11.6", note: "Fri Jun 26 close; bounced ~+1.9% intraday Mon Jun 29.", hist: [25651,25387,25606,25599,25328,25006,25182,25398,26038,25633,25253,24962,24657,24566,24408,24249,24718,24843,24494,24312,24312,23925,23769,23336,23090,23077,22672] }
+      { name: "S&P 500",          level: 7773.95,  day: "+0.66", month: "+0.72", ytd: "+13.6", note: "Mon Oct 5 close; near its Aug record (~7,799).", hist: [7552,7638,7651,7765,7765,7706,7704,7743,7684,7671,7652,7666,7723,7774] },
+      { name: "Nasdaq Composite", level: 27477.31, day: "+1.05", month: "+3.66", ytd: "+18.2", hist: [25978,26418,26523,27122,27244,26936,26939,27069,26820,26798,26861,26872,27191,27477] },
+      { name: "Nasdaq 100",       level: 31076.44, day: "+0.87", month: "+5.19", ytd: "+23.1", hist: [28945,29447,29644,30482,30732,30470,30479,30608,30277,30339,30409,30502,30808,31076] },
+      { name: "Dow Jones",        level: 51267.90, day: "+0.18", month: "-4.0", ytd: "+6.7", note: "Lagged tech — fell ~4% on the month as the rate hike hit cyclicals.", hist: [51462,51778,51683,52049,51864,51512,51350,51829,51482,51350,50906,50927,51177,51268] },
+      { name: "Russell 2000",     level: 2847.14,  day: "+0.50", month: "-4.3", ytd: "+14.4", note: "Small-caps hit hardest by the September rate hike." },
+      { name: "STOXX Europe 600", level: 635.66,   day: "+0.32", month: "-2.2", ytd: "+7.2", note: "Oct 6 close." },
+      { name: "FTSE 100",         level: 10518.25, day: "+0.19", month: "-2.8", ytd: "+5.9", note: "Oct 6 close." },
+      { name: "Nikkei 225",       level: 70683.98, day: "+1.05", month: "+7.0", ytd: "+41.1", note: "Oct 6 close; a 2026 standout. Some sites misreport YTD ~+80% (a base-date error) — true YTD ~+41%." },
+      { name: "Hang Seng",        level: 24160.00, day: "+0.50", month: "-4.9", ytd: "-5.7", note: "Oct 6 close." }
     ],
 
     rates: [
-      { name: "US 10-Year Treasury", value: "4.37%",      change: "At a ~7-week low after the in-line PCE; steady into Monday" },
-      { name: "US 2-Year Treasury",  value: "4.10%",      change: "Front end firm on the hawkish-Fed bias (2s10s ~+27bp)" },
-      { name: "Fed Funds (target)",  value: "3.50–3.75%", change: "Held Jun 17; markets near a coin-flip on a Sept HIKE (~44%)" }
+      { name: "US 10-Year Treasury", value: "5.28%",      change: "Near multi-year highs (was ~4.96% Sep 21) on the Fed's hawkish turn" },
+      { name: "US 2-Year Treasury",  value: "4.83%",      change: "Up sharply since the September hike; 2s10s spread ~+45bp" },
+      { name: "Fed Funds (target)",  value: "3.75–4.00%", change: "HIKED +25bp Sep 16 (first hike since 2023, 12–0); held Jul 29" }
     ],
 
     fx: [
-      { name: "EUR/USD",            value: "1.1386", day: "+0.02" },
-      { name: "USD/JPY",            value: "161.69", day: "-0.06" },
-      { name: "GBP/USD",            value: "1.3203", day: "+0.04" },
-      { name: "Dollar Index (DXY)", value: "101.30", day: "-0.06" }
+      { name: "EUR/USD",            value: "1.1249", day: "+0.24" },
+      { name: "USD/JPY",            value: "158.07", day: "+0.10" },
+      { name: "GBP/USD",            value: "1.3267", day: "+0.34" },
+      { name: "Dollar Index (DXY)", value: "101.92", day: "-0.24" }
     ],
 
     crypto: [
-      { name: "Bitcoin",  price: 59300, day: "-1.4", month: "-19.0", year: "-44.0" },
-      { name: "Ethereum", price: 1565,  day: "-0.5", month: "-21.0", year: "-35.0" }
+      { name: "Bitcoin",  price: 86082, day: "+0.3", month: "+8.8", year: "-29.1" },
+      { name: "Ethereum", price: 2711,  day: "-0.0", month: "+8.8", year: "-39.1" }
     ]
   },
 
   /* ---------- REGIONAL MARKETS (GCC & Egypt) ---------- */
-  /* Latest close: Saudi/Qatar/Kuwait/Oman/Egypt = Sun Jun 28 · UAE (ADX/DFM) = Fri Jun 26 (UAE trades Mon–Fri) · Bahrain = Jun 24 */
+  /* Oct 6 close (YTD computed vs the Dec 31 2025 close, not the 1-year figure) */
   regionalMarkets: [
-    { name: "Saudi · TASI",        level: 10907.67, day: "-0.23", month: "-1.54", ytd: "+4.0", note: "Sun Jun 28 close" },
-    { name: "Abu Dhabi · ADX",     level: 9880.00,  day: "-1.32", month: "+2.38", ytd: "-1.1", note: "Fri Jun 26 close" },
-    { name: "Dubai · DFM",         level: 6018.00,  day: "-0.10", month: "-4.32", ytd: "-0.5", note: "Fri Jun 26 close" },
-    { name: "Qatar · QE",          level: 10293.72, day: "+0.12", month: "-2.48", ytd: "-4.4", note: "Sun Jun 28 close" },
-    { name: "Kuwait · All-Share",  level: 8693.82,  day: "+0.07", month: "-0.76", ytd: "-2.4", note: "Sun Jun 28 close" },
-    { name: "Bahrain · All-Share", level: 2041.60,  day: "+0.26", month: "+3.16", ytd: "-1.21", note: "Last quote Jun 24" },
-    { name: "Oman · MSX 30",       level: 7402.65,  day: "+1.18", month: "-4.57", ytd: "+26.2", note: "Sun Jun 28 close; +26% YTD (the ~+64% headline is the 1-year figure)" },
-    { name: "Egypt · EGX 30",      level: 50344.37, day: "-2.14", month: "-4.75", ytd: "+20.4", note: "Sun Jun 28 close; +20% YTD (the ~+52% headline is the 1-year figure)" }
+    { name: "Saudi · TASI",        level: 10590.00, day: "+1.05", month: "-3.94", ytd: "+0.95", note: "Oct 6 close" },
+    { name: "Abu Dhabi · ADX",     level: 9993.00,  day: "-0.17", month: "+0.18", ytd: "+0.01", note: "Oct 6 close" },
+    { name: "Dubai · DFM",         level: 5908.00,  day: "+0.12", month: "-0.39", ytd: "-2.30", note: "Oct 6 close" },
+    { name: "Qatar · QE",          level: 9259.00,  day: "-0.28", month: "-5.38", ytd: "-13.97", note: "Oct 6 close; the region's weakest YTD" },
+    { name: "Kuwait · All-Share",  level: 8638.52,  day: "-0.59", month: "-2.28", ytd: "-3.02", note: "Oct 6 close" },
+    { name: "Bahrain · All-Share", level: 1902.46,  day: "-0.23", month: "-1.80", ytd: "-7.94", note: "Oct 6 close" },
+    { name: "Oman · MSX 30",       level: 7788.00,  day: "+0.75", month: "+2.40", ytd: "+32.75", note: "Oct 6 close; +33% YTD (a 2026 standout)" },
+    { name: "Egypt · EGX 30",      level: 53298.00, day: "-0.48", month: "-5.88", ytd: "+27.42", note: "Oct 6 close; +27% YTD (the ~+44% headline is the 1-year figure)" }
   ],
 
   /* ---------- WEEK AHEAD (scheduled catalysts) ---------- */
   weekAhead: [
-    { date: "Mon Jun 29", category: "Geopolitics", event: "US Supreme Court opinion day (rulings later today)", detail: "Marquee cases still pending — birthright citizenship, firing Fed Governor Lisa Cook (Trump v. Cook), and transgender sports." },
-    { date: "Mon Jun 29", category: "Central Bank", event: "ECB Sintra Forum opens (through Jul 1)", detail: "Lagarde hosts global central bankers; a key venue for rate signals in a hawkish-Fed week." },
-    { date: "Tue Jun 30", category: "Econ", event: "US consumer confidence + Chicago PMI", detail: "Conference Board confidence and a regional manufacturing gauge for June (quarter/half-end)." },
-    { date: "Tue Jun 30", category: "Earnings", event: "Nike Q4 (after close)", detail: "A low bar — consensus ~$0.12 EPS on ~$10.85B revenue; China and tariff drag in focus." },
-    { date: "Tue Jun 30", category: "IPO", event: "Lime (Nasdaq: LIME) IPO pricing", detail: "Uber-backed e-scooter operator; $24–26/share for a ~$1.8B valuation (Uber an anchor buyer)." },
-    { date: "Tue Jun 30", category: "IPO", event: "ITG + Sinda price (trade Wed Jul 1)", detail: "ITG (digital infra, ~$400M) and Sinda (a silver miner, ~$235M) crowd the pre-holiday window." },
-    { date: "Wed Jul 1", category: "Econ", event: "ISM Manufacturing + ADP + JOLTS", detail: "A heavy data day — factory activity, private payrolls and job openings ahead of Thursday's jobs report." },
-    { date: "Wed Jul 1", category: "Earnings", event: "General Mills Q4 (before open)", detail: "Fiscal Q4 + the FY27 guide; consensus ~$0.82 EPS." },
-    { date: "Thu Jul 2", category: "Econ", event: "June jobs report (nonfarm payrolls)", detail: "The week's marquee print — pulled forward to Thursday (consensus ~172K) ahead of the holiday." },
-    { date: "Thu Jul 2", category: "Econ", event: "ISM Services + factory orders", detail: "Moved up due to the holiday; a read on the larger services economy." },
-    { date: "Thu Jul 3", category: "Geopolitics", event: "US markets close early", detail: "Stocks and bonds close early (~1pm ET) ahead of Independence Day." },
-    { date: "Fri Jul 4", category: "Geopolitics", event: "US markets closed — Independence Day", detail: "Equities and bonds shut for the holiday." },
-    { date: "Sun Jul 5", category: "Geopolitics", event: "OPEC+ ministerial (output for August)", detail: "The eight monthly-quota nations set August output as oil sits at ~4-month lows." },
-    { date: "Tue Jul 8", category: "Geopolitics", event: "NATO summit, Ankara (Jul 7–8)", detail: "The 36th NATO summit; defense spending and Ukraine on the agenda." }
+    { date: "Wed Oct 7", category: "Central Bank", event: "FOMC minutes (September meeting)", detail: "Minutes of the Sep meeting where the Fed hiked to 3.75–4.00% — markets parse how many more hikes are coming." },
+    { date: "Wed Oct 7", category: "Geopolitics", event: "Oct 7 anniversary", detail: "Third anniversary of the 2023 Hamas attack; commemorations across Israel amid a strained Gaza truce." },
+    { date: "Fri Oct 9", category: "Econ", event: "UMich consumer sentiment (prelim, Oct)", detail: "A private survey — one of the cleaner US reads on the consumer and inflation expectations." },
+    { date: "Mon Oct 12", category: "Markets", event: "Columbus Day — US bond market closed", detail: "The stock market stays open; Treasury trading is shut for the holiday." },
+    { date: "Mon Oct 12", category: "Geopolitics", event: "IMF–World Bank Annual Meetings open (Bangkok)", detail: "Through Oct 18 — global growth, debt and the oil-shock outlook, with sideline bilaterals." },
+    { date: "Tue Oct 13", category: "Earnings", event: "Q3 bank kickoff: JPMorgan, Goldman, Citi, Wells Fargo", detail: "The unofficial start of earnings season (plus Johnson & Johnson); trading and dealmaking fees in focus." },
+    { date: "Wed Oct 14", category: "Earnings", event: "Bank of America, Morgan Stanley, ASML", detail: "More banks plus ASML — a key read on AI-chip capex." },
+    { date: "Wed Oct 14", category: "Econ", event: "US CPI (September) + Fed Beige Book", detail: "The marquee inflation print (the data is flowing normally — no shutdown) ahead of the Oct 27–28 FOMC." },
+    { date: "Thu Oct 15", category: "Econ", event: "US PPI + retail sales (September)", detail: "Wholesale inflation and a read on whether the consumer is slowing with the labor market." },
+    { date: "Thu Oct 15", category: "Earnings", event: "TSMC Q3", detail: "The world's top chip foundry — the cleanest gauge of AI-hardware demand." },
+    { date: "Oct (TBD)", category: "IPO", event: "Anthropic Nasdaq listing watch", detail: "Reported to be targeting an October IPO (potentially >$60B raised) — no confirmed pricing date yet." },
+    { date: "Tue Oct 27", category: "Central Bank", event: "Next FOMC meeting (Oct 27–28)", detail: "Markets are split on whether the Fed delivers another hike after the soft September jobs report." }
   ],
 
   /* ---------- BIG STOCKS (largest by market cap) ---------- */
-  /* Price & 1-day = Fri Jun 26 close (carried forward — US reopens Mon afternoon) · 1M / 1Y = trailing price return */
+  /* Price & 1-day = Mon Oct 5 close · 1M / 1Y = trailing price return · ranking: Meta jumped to #7 */
   stocks: [
-    { ticker: "NVDA",  name: "Nvidia",              price: 192.53, day: "-1.64", month: "-10.4", year: "+24.8",  mktcap: "$4.66T", hist: [220.6,223.5,219.5,215.3,214.9,212.6,214.3,211.1,224.4,222.8,214.8,218.7,205.1,208.6,208.2,200.4,204.9,205.2,212.5,207.4,204.65,210.69,208.65,200.04,199.00,195.74,192.53] },
-    { ticker: "AAPL",  name: "Apple",               price: 283.78, day: "+3.14", month: "-8.0",  year: "+40.8",  mktcap: "$4.17T", hist: [299,302.3,305,308.8,308.3,310.9,312.5,312.1,306.3,315.2,310.3,311.2,307.3,301.5,290.6,291.6,295.6,291.1,296.4,299.2,295.95,298.01,297.01,294.30,293.08,275.15,283.78] },
-    { ticker: "GOOGL", name: "Alphabet",            price: 337.39, day: "-1.84", month: "-13.2", year: "+97.7",  mktcap: "$4.12T", hist: [387.7,388.9,387.7,383,388.9,388.8,390.1,380.3,376.4,361.9,359,372.2,368.5,363.3,364.3,356.4,357.8,359.7,369.4,373.3,363.79,368.03,349.68,346.13,345.29,343.71,337.39] },
-    { ticker: "MSFT",  name: "Microsoft",           price: 372.97, day: "+5.71", month: "-10.4", year: "-24.2",  mktcap: "$2.77T", hist: [417.4,421.1,419.1,418.6,416,412.7,427,450.2,460.5,441.3,427.3,428.1,416.7,411.7,403.4,397.4,390.3,390.7,399.8,393.8,378.91,379.40,367.34,373.94,365.46,352.83,372.97] },
-    { ticker: "AMZN",  name: "Amazon",              price: 232.69, day: "+2.50", month: "-12.3", year: "+9.8",   mktcap: "$2.50T", hist: [259.3,265,268.5,266.3,265.3,271.9,274,270.6,261.3,256.5,250,253.8,246,245.2,244.2,238,241.5,238.6,246,246,237.5,244.39,232.79,234.11,234.27,227.01,232.69] },
-    { ticker: "SPCX",  name: "SpaceX",              price: 153.23, day: "+0.15", month: "n/a",   year: "n/a",    mktcap: "$2.02T", hist: [192.5,201.8,191.82,174.90,154.60,156.11,154.54,153.00,153.23] },
-    { ticker: "AVGO",  name: "Broadcom",            price: 365.02, day: "-3.67", month: "-13.3", year: "+37.9",  mktcap: "$1.74T", hist: [411.1,417.8,414.6,414.1,422,421.9,426.6,446.8,460,481.6,479.2,418.9,385.7,396.6,392.2,372.1,385.6,382.1,393.9,376.7,392.9,411.35,392.13,380.15,382.07,378.91,365.02] },
-    { ticker: "TSLA",  name: "Tesla",               price: 379.71, day: "+1.22", month: "-12.4", year: "+15.9",  mktcap: "$1.43T", hist: [404.1,417.3,417.9,426,433.6,440.4,442.1,435.8,415.9,423.7,423.7,418.5,391,409,396.7,381.6,399.2,406.4,411.2,404.7,396.38,400.49,405.05,381.61,375.53,375.12,379.71] },
-    { ticker: "META",  name: "Meta Platforms",      price: 550.25, day: "+1.36", month: "-10.1", year: "-22.4",  mktcap: "$1.40T", hist: [602.6,605.1,607.4,610.3,612.3,635.3,635.3,632.5,600.5,597.6,623,627.6,593,585.4,584.6,571,568.4,567,593.5,600.2,567.58,577.22,563.85,562.20,557.67,542.87,550.25] },
-    { ticker: "BRK.B", name: "Berkshire Hathaway",  price: 498.66, day: "+2.22", month: "+3.1",  year: "+2.6",   mktcap: "$1.07T", hist: [480.5,480.9,480,486.4,483.6,479.9,477.4,474.5,470.3,471.5,475.4,478.6,488.1,487,487.8,483.7,485.8,489.3,495.5,495,491.28,489.46,488.69,492.81,494.81,487.81,498.66] },
-    { ticker: "JPM",   name: "JPMorgan Chase",      price: 329.05, day: "-1.81", month: "+7.3",  year: "+15.8",  mktcap: "$882B", hist: [295.7,302,303,306.4,306.7,299.3,296.7,299.3,296.6,301,300.9,310.9,312.4,311.1,312.7,309.1,313.5,320.7,319.4,331.1,333.46,325.22,331.48,334.14,333.45,335.12,329.05] }
+    { ticker: "NVDA",  name: "Nvidia",              price: 238.90, day: "+2.12", month: "+3.7",  year: "+29.0",  mktcap: "$5.85T", hist: [213.90,219.34,222.27,227.38,228.87,225.51,224.58,225.07,228.86,227.21,228.38,230.86,233.95,238.90] },
+    { ticker: "AAPL",  name: "Apple",               price: 332.89, day: "-0.24", month: "+4.0",  year: "+28.3",  mktcap: "$4.86T", hist: [332.41,337.00,336.13,338.98,339.75,337.02,335.92,341.07,338.40,329.40,333.02,330.32,333.69,332.89] },
+    { ticker: "GOOGL", name: "Alphabet",            price: 346.47, day: "+0.86", month: "+2.4",  year: "+40.6",  mktcap: "$4.19T", hist: [342.87,347.33,349.54,354.97,351.16,337.83,342.36,343.92,342.75,340.92,344.08,338.24,343.50,346.47] },
+    { ticker: "MSFT",  name: "Microsoft",           price: 525.18, day: "+1.48", month: "+5.1",  year: "+3.1",   mktcap: "$3.96T", hist: [490.30,497.75,493.78,501.61,498.00,500.59,497.93,516.17,509.22,508.96,512.90,512.80,517.53,525.18] },
+    { ticker: "AMZN",  name: "Amazon",              price: 251.40, day: "-0.05", month: "-2.8",  year: "+15.1",  mktcap: "$2.73T", hist: [245.96,251.19,253.71,258.45,254.98,249.27,249.38,249.67,246.15,246.67,249.15,248.23,251.52,251.40] },
+    { ticker: "SPCX",  name: "SpaceX",              price: 171.09, day: "+7.63", month: "+15.6", year: "n/a",    mktcap: "$2.31T", hist: [150.88,154.81,152.71,151.85,154.72,148.36,148.03,148.68,145.47,149.24,150.86,148.07,158.96,171.09] },
+    { ticker: "META",  name: "Meta Platforms",      price: 741.90, day: "+1.90", month: "+20.3", year: "+3.8",   mktcap: "$1.89T", hist: [673.31,682.31,665.75,741.25,736.60,744.10,777.59,751.66,715.62,738.79,725.18,725.93,728.08,741.90] },
+    { ticker: "AVGO",  name: "Broadcom",            price: 362.51, day: "+2.08", month: "+1.3",  year: "+11.3",  mktcap: "$1.79T", hist: [339.51,347.30,357.61,362.66,364.54,354.99,350.36,352.81,349.57,355.10,351.19,343.64,355.14,362.51] },
+    { ticker: "TSLA",  name: "Tesla",               price: 378.73, day: "+2.20", month: "+7.0",  year: "-11.4",  mktcap: "$1.51T", hist: [358.08,366.20,364.27,375.30,378.90,380.12,377.94,372.11,357.45,352.84,354.81,354.11,370.59,378.73] },
+    { ticker: "BRK.B", name: "Berkshire Hathaway",  price: 504.26, day: "+0.32", month: "-0.4",  year: "+1.9",   mktcap: "$1.09T", hist: [519.80,509.20,509.77,502.01,503.49,507.17,505.18,505.48,503.09,502.35,497.95,500.50,502.65,504.26] },
+    { ticker: "JPM",   name: "JPMorgan Chase",      price: 332.38, day: "0.00", month: "-7.3",  year: "+7.7",   mktcap: "$884B", hist: [348.92,349.31,349.67,352.04,340.00,337.53,338.56,343.06,336.59,334.98,330.83,333.18,332.38,332.38] }
   ],
 
   /* ---------- COMMODITIES ---------- */
-  /* Live, Mon Jun 29 AM — oil bouncing slightly off ~4-month lows ahead of the Jul 5 OPEC+ meeting */
+  /* Live, Oct 6 — oil elevated as the renewed Iran conflict disrupts the Strait of Hormuz */
   commodities: [
-    { name: "WTI Crude",   price: 69.83,   unit: "$/bbl",     day: "+0.87", month: "-24.2", ytd: "+13.7" },
-    { name: "Brent Crude", price: 72.22,   unit: "$/bbl",     day: "+0.32", month: "-24.0", ytd: "+18.2" },
-    { name: "Natural Gas", price: 3.28,    unit: "$/MMBtu",   day: "+0.04", month: "+3.2",  ytd: "-22.9" },
-    { name: "Gold",        price: 4050.41, unit: "$/oz",      day: "-0.90", month: "-9.7",  ytd: "-3.9" },
-    { name: "Silver",      price: 58.22,   unit: "$/oz",      day: "-0.96", month: "-22.2", ytd: "-14.9" },
-    { name: "Copper",      price: 6.13,    unit: "$/lb",      day: "-0.26", month: "-6.1",  ytd: "+7.9" },
-    { name: "Wheat",       price: 575.31,  unit: "¢/bushel",  day: "-0.51", month: "-5.5",  ytd: "+9.4" }
+    { name: "WTI Crude",   price: 88.03,   unit: "$/bbl",     day: "-1.57", month: "-5.4",  ytd: "+53.3" },
+    { name: "Brent Crude", price: 98.47,   unit: "$/bbl",     day: "-1.85", month: "+1.3",  ytd: "+61.8" },
+    { name: "Natural Gas", price: 3.11,    unit: "$/MMBtu",   day: "+1.52", month: "+6.7",  ytd: "-15.6" },
+    { name: "Gold",        price: 4152.53, unit: "$/oz",      day: "+0.31", month: "-5.7",  ytd: "-3.9" },
+    { name: "Silver",      price: 60.99,   unit: "$/oz",      day: "-0.10", month: "-7.8",  ytd: "-14.4" },
+    { name: "Copper",      price: 6.57,    unit: "$/lb",      day: "-0.30", month: "-2.6",  ytd: "+15.6" },
+    { name: "Wheat",       price: 698.45,  unit: "¢/bushel",  day: "+0.90", month: "-4.4",  ytd: "+37.8" }
   ],
 
   /* ---------- FINANCIAL NEWS ---------- */
   financialNews: [
-    { category: "Macro", headline: "US futures bounce to start a holiday-shortened, jobs-report week",
-      summary: "S&P 500 futures rose ~0.6% Monday (with the VIX down) as the US–Iran de-escalation extended over the weekend — both sides reportedly agreeing to halt strikes and meet in Qatar — partly retracing last week's tech-led rout (Nasdaq −4.6%). Investors close out June, Q2 and H1 into Thursday's payrolls.",
-      source: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-june-29-224230573.html", date: "Jun 29, 2026" },
+    { category: "Macro", headline: "US stocks hold near records on AI even as the Fed turns hawkish",
+      summary: "The S&P 500 closed Oct 5 at 7,773.95 (+13.6% YTD), just shy of its August record, led by AI megacaps (Nvidia ~$5.8T, Meta +20% on the month) — resilience that has persisted despite a September rate hike and a 10-year yield near 5.3%.",
+      source: "AP / Standard-Journal", url: "https://www.standard-journal.com/ap/business/us-stocks-rise-back-towards-records-as-ai-companies-report-strong-profits/article_c0be0e64-425c-5591-956b-deb5eca54e1d.html", date: "Oct 5, 2026" },
 
-    { category: "Macro", headline: "Oil bounces off ~4-month lows ahead of the Jul 5 OPEC+ meeting",
-      summary: "WTI rose ~1% to ~$70 and Brent to ~$72 Monday, recovering from Friday's ~$68.9 print (the lowest since February) as Strait of Hormuz transits resumed; crude is still down ~24% on the month, with the eight OPEC+ producers meeting July 5 to set August output.",
-      source: "Trading Economics", url: "https://tradingeconomics.com/commodity/crude-oil", date: "Jun 29, 2026" },
+    { category: "Macro", headline: "Fed hikes to 3.75–4.00% — its first rate increase since 2023",
+      summary: "The FOMC raised the funds-rate target by 25bp on Sep 16 in a unanimous 12–0 vote (after a divided 9–3 hold on Jul 29), with Chair Kevin Warsh prioritizing the fight against Iran-war-driven inflation; the SEP lifted the 2026 PCE projection to 3.6%.",
+      source: "CNBC", url: "https://www.cnbc.com/2026/09/16/fed-meeting-today-live-updates.html", date: "Sep 16, 2026" },
 
-    { category: "Macro", headline: "Hawkish Fed after hot PCE — a September hike is now a coin-flip",
-      summary: "May PCE hit a 3-year high (4.1% headline, 3.4% core) and the Fed has erased its 2026 cut signal; with 9 of 18 officials penciling a hike, CME FedWatch shows roughly even odds (~44%) of a September increase under Chair Kevin Warsh.",
-      source: "CNBC", url: "https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html", date: "Jun 25, 2026" },
+    { category: "Macro", headline: "September jobs report nearly stalls — just +29,000, jobless rate up to 4.2%",
+      summary: "Payrolls rose only 29,000 in September (released Oct 2, below the ~90k expected), unemployment ticked up to 4.2%, and July/August were revised down a combined 60,000 — a clear labor-market cooldown that trimmed the odds of another Fed hike.",
+      source: "Fox Business", url: "https://www.foxbusiness.com/economy/us-jobs-report-september-2026", date: "Oct 2, 2026" },
 
-    { category: "Macro", headline: "ECB Sintra forum opens; Lagarde hosts global central bankers",
-      summary: "The ECB Forum on Central Banking runs June 29–July 1 in Sintra ('Shaping Europe's future'), with Lagarde's opening speech tonight — the week's key central-bank venue alongside US payrolls, with the ECB at 2.25% after its June hike.",
-      source: "ECB", url: "https://www.ecb.europa.eu/press/conferences/html/20260629_ecb_forum_on_central_banking.en.html", date: "Jun 29, 2026" },
+    { category: "Macro", headline: "Government shutdown averted — stopgap funds Washington through Dec 11",
+      summary: "Congress acted nearly a month early: a continuing resolution (Senate 90–6, House 370–48) signed Sep 2 keeps the government open past the Oct 1 fiscal-year start and the Nov 3 midterms, pushing the next funding cliff to Dec 11 — so official data is flowing normally.",
+      source: "NBC News", url: "https://www.nbcnews.com/politics/congress/senate-leaders-reach-deal-avert-shutdown-2026-elections-rcna590564", date: "Sep 2, 2026" },
 
-    { category: "Macro", headline: "Final Q1 GDP revised up to 2.1%; dollar near a 13-month high",
-      summary: "The third estimate of Q1 GDP was lifted to a 2.1% annualized pace (from 1.6%) with claims falling, while the dollar held near a 13-month high and the 10-year yield eased to ~4.37% after the in-line PCE.",
-      source: "The Globe and Mail", url: "https://www.theglobeandmail.com/business/article-us-pce-inflation-measure-tops-4-in-may-consumer-spending-strong/", date: "Jun 25, 2026" },
+    { category: "Macro", headline: "Oil stays elevated — Brent near $98 — on the Iran conflict and Hormuz risk",
+      summary: "Brent traded around $98 and WTI ~$88 (both up 50%+ YTD) as the renewed US–Iran conflict keeps a risk premium on Strait of Hormuz shipping; OPEC+ held October output steady and the G7 has been drawing down emergency stockpiles.",
+      source: "Energy Connects", url: "https://www.energyconnects.com/news/oil/2026/september/opecplus-keeps-output-policy-unchanged-for-october", date: "Oct 6, 2026" },
 
-    { category: "M&A", headline: "Merck KGaA to buy Bio-Techne for $11.3B",
-      summary: "German drugmaker Merck KGaA agreed to acquire US life-sciences firm Bio-Techne for $11.3B — its largest acquisition in over a decade — expanding in life-science tools and reagents.",
-      source: "Pharmaphorum", url: "https://pharmaphorum.com/news/merck-buys-life-sciences-firm-bio-techne-113bn-deal", date: "Jun 25, 2026" },
+    { category: "M&A", headline: "Paramount's ~$110B Warner Bros. Discovery takeover moves toward close",
+      summary: "Paramount Skydance is acquiring Warner Bros. Discovery at $31.00/share — about $81B of equity (~$110B enterprise value) — in the year's largest media megadeal, uniting Harry Potter, DC, Star Trek and SpongeBob under one roof; with financing locked, it is proceeding toward completion.",
+      source: "Reuters / afaqs", url: "https://www.afaqs.com/news/media/paramount-to-acquire-warner-bros-discovery-in-110-billion-deal-11163286", date: "Oct 2026" },
 
-    { category: "M&A", headline: "AbbVie to acquire Apogee Therapeutics for $10.9B",
-      summary: "AbbVie will buy Apogee at $135.11/share in cash (~$10.9B) for its long-acting immunology/respiratory pipeline (atopic dermatitis, asthma) — the year's second-largest biotech buyout — closing Q3 2026.",
-      source: "AbbVie", url: "https://news.abbvie.com/2026-06-22-AbbVie-to-Acquire-Apogee-Therapeutics,-Deepening-Immunology-Portfolio", date: "Jun 22, 2026" },
+    { category: "Capital Markets", headline: "Paramount lands a ~$52B financing package; bond book tops $109B",
+      summary: "Paramount Skydance priced the year's largest M&A financing (~$52B, including ~$7.5B of loans) for the WBD deal; the investment-grade bond tranche (~$30B) drew more than $109B of orders — ~3.6x oversubscribed — and was rated investment grade by Fitch and S&P.",
+      source: "Pulse 2.0", url: "https://pulse2.com/paramount-draws-more-than-109-billion-of-orders-for-warner-bros-discovery-bond-financing/", date: "Sep 30, 2026" },
 
-    { category: "M&A", headline: "2026 biotech/pharma M&A tops ~$123B as dealmaking booms",
-      summary: "With Merck KGaA–Bio-Techne and AbbVie–Apogee, 2026 pharma/biotech M&A has now topped ~$123B year-to-date — a boom driven by large-cap drugmakers racing to refill pipelines ahead of patent cliffs.",
-      source: "STAT News", url: "https://www.statnews.com/2026/06/22/pharma-biotech-ma-boom-2026-deals-total-123-billion/", date: "Jun 2026" },
+    { category: "M&A", headline: "Aon to buy USI Insurance from KKR for $17B",
+      summary: "Insurance broker Aon agreed to acquire USI Insurance Services (~$3B annual revenue) from KKR for $17B including debt — an all-cash deal targeting ~$395M of run-rate synergies and a Q4 2026 close; Aon shares fell ~10% on the news.",
+      source: "FinTech Global", url: "https://fintech.global/2026/09/01/aon-agrees-17bn-deal-to-acquire-usi-from-kkr/", date: "Sep 1, 2026" },
 
-    { category: "IPO", headline: "Doncasters closes up ~42% after a $1.06B IPO",
-      summary: "The aerospace superalloy maker priced an upsized IPO at $33 (above range) on June 25, popped ~33% to $44 and closed up ~42% at $46.88, with total capital raised topping $1.06B including a Qatar Investment Authority placement.",
-      source: "Bloomberg Law", url: "https://news.bloomberglaw.com/mergers-and-acquisitions/doncasters-gains-33-after-1-06-billion-ipo-private-placements", date: "Jun 25, 2026" },
+    { category: "Capital Markets", headline: "Record US investment-grade bond supply — September tops ~$200B",
+      summary: "US high-grade corporate issuance hit about $200.9B in September (one of the five biggest months on record, boosted by the Paramount jumbo deal) as issuers rushed to beat rising yields; 2026 gross supply is tracking toward a record north of $2T.",
+      source: "9fin", url: "https://9fin.com/insights/us-ig-wrap-september-volume", date: "Oct 2026" },
 
-    { category: "IPO", headline: "A busy pre-July-4 IPO window: Lime, ITG and Sinda price this week",
-      summary: "Uber-backed Lime set terms for a Nasdaq listing (~$1.8B valuation, pricing this week), while ITG (~$400M, digital infra) and Sinda (~$235M, a silver miner) price Tuesday night to trade Wednesday — the busiest new-issue stretch before the holiday.",
-      source: "IPOScoop", url: "https://www.iposcoop.com/the-ipo-buzz-itg-sinda-launch-ipos-to-price-next-week-ahead-of-july-4th-holiday/", date: "Jun 29, 2026" },
+    { category: "Earnings", headline: "Q3 2026 earnings season opens with high expectations",
+      summary: "FactSet projects S&P 500 Q3 earnings growth of ~29.5% y/y on ~12.3% revenue growth — which would be a third straight quarter of 25%+ profit growth, led by tech, energy and communication services — with analysts unusually raising (not cutting) estimates into the prints.",
+      source: "FactSet", url: "https://insight.factset.com/sp-500-earnings-season-preview-q3-2026", date: "Oct 2, 2026" },
 
-    { category: "IPO", headline: "SpaceX settles near $153; analysts split on the trillion-dollar debate",
-      summary: "After the largest IPO ever (priced $135, ATH $225.64 on Jun 16), SPCX trades ~$153; CFRA initiated coverage at Sell ($115 target) while New Street started at $165 — a wide split on the valuation.",
-      source: "CNBC", url: "https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html", date: "Jun 29, 2026" },
+    { category: "Macro", headline: "Rotation out of rate-sensitive stocks — Dow and small-caps lag tech",
+      summary: "The September hike split the market: the Dow fell ~4% and the Russell 2000 ~4.3% over the past month as higher yields hit cyclicals and small-caps, while the Nasdaq rose on AI strength — a widening leadership gap under a near-5.3% 10-year.",
+      source: "MarketScreener", url: "https://www.marketscreener.com/quote/index/RUSSELL-2000-INDEX-4515/", date: "Oct 6, 2026" },
 
-    { category: "Earnings", headline: "Micron's blowout keeps lifting AI sentiment",
-      summary: "Micron's ~15% jump after its June 24 record results (a ~$50B Q4 guide on sold-out HBM) is still reverberating, having lifted memory and AI-capex peers — a rare bright spot heading into a soft week for chips.",
-      source: "CNBC", url: "https://www.cnbc.com/2026/06/25/micron-stock-3q-earnings-memory.html", date: "Jun 25, 2026" },
+    { category: "Deal", headline: "Bitcoin recovers to ~$86k but is still down sharply year-on-year",
+      summary: "Bitcoin trades near $86,000 (up ~9% on the month, having rebounded from its summer lows near $59k) and Ethereum ~$2,710, yet both remain down ~29% and ~39% respectively over 12 months — a crypto bear market under higher-for-longer rates.",
+      source: "Trading Economics", url: "https://tradingeconomics.com/btcusd:cur", date: "Oct 6, 2026" },
 
-    { category: "Earnings", headline: "Nike Q4 preview (Jun 30) — a low bar with tariff drag",
-      summary: "Consensus is just $0.12 EPS on ~$10.85B revenue (a ~2% decline) after estimates were cut ~45% in three months, with Greater China guided ~−20% and ~250bps of tariff drag — though a tariff-refund gain could surprise.",
-      source: "AlphaStreet", url: "https://news.alphastreet.com/nike-q4-2026-earnings-preview-june-30-street-expects-0-12-eps/", date: "Jun 29, 2026" },
+    { category: "IPO", headline: "A busy late-September US IPO window",
+      summary: "Listings clustered before month-end — Accelevation (ACCV) raised $540M, ADARx Pharmaceuticals (ADRX) $447M, Electra Therapeutics (ETRA) $350M and Orion180 Insurance (OIG) $240M — one of the busiest new-issue stretches in years.",
+      source: "IPOScoop", url: "https://www.iposcoop.com/current-year-pricings/", date: "Sep 2026" },
 
-    { category: "M&A", headline: "Clearwater Analytics taken private for $8.4B",
-      summary: "A Permira- and Warburg Pincus-led group (with Francisco Partners and Temasek) closed its $8.4B take-private of Clearwater at $24.55/share (~47% premium), backed by $3.5B of Goldman-led direct lending; the stock has delisted.",
-      source: "Permira", url: "https://www.permira.com/news-and-insights/announcements/clearwater-analytics-completes-84-billion-take-private-acquisition-by-permira-and-warburg-pincus", date: "Jun 25, 2026" },
+    { category: "IPO", headline: "NSE readies India's biggest-ever IPO (~$3.6B)",
+      summary: "The National Stock Exchange of India moved to list after SEBI approval with a ~₹30,000 crore (~$3.6B) all-secondary offer — India's largest IPO ever — at a valuation near ₹5.26 lakh crore, a notable global new-issue amid a strong 2026 IPO market.",
+      source: "Outlook Business", url: "https://www.outlookbusiness.com/markets/nse-rs-30000-cr-ipo-issue-likely-to-open-on-september-18-listing-on-sep-25", date: "Sep 2026" },
 
-    { category: "Capital Markets", headline: "IG credit: record supply on AI/data-center debt",
-      summary: "Investment-grade spreads sit near the tightest in ~25 years (~80–100bp) even as 2026 gross issuance is forecast at ~$2.46T (+11.8% y/y) — with JPMorgan projecting ~$1.5T of cumulative AI/data-center IG debt over five years.",
-      source: "Charles Schwab", url: "https://www.schwab.com/learn/story/corporate-bond-outlook", date: "Jun 2026" },
+    { category: "Macro", headline: "Dollar eases from its highs; gold holds near $4,150 after a blow-off spike",
+      summary: "The Dollar Index slipped to ~101.9 even with the Fed hawkish, while gold sits near $4,152 (down ~6% on the month after an earlier spike above $5,000) and silver near $61 — precious metals cooling as real yields climb.",
+      source: "Trading Economics", url: "https://tradingeconomics.com/commodity/gold", date: "Oct 6, 2026" },
 
-    { category: "Capital Markets", headline: "7-year Treasury auction clears sharply lower at 3.79%",
-      summary: "The $44B 7-year note auctioned at a high yield of 3.790% (down from 4.018% prior) with a 2.50 bid-to-cover — consistent with the week's flight to safety and falling yields.",
-      source: "TreasuryDirect", url: "https://www.treasurydirect.gov/auctions/announcements-data-results/", date: "Jun 25, 2026" },
-
-    { category: "IPO", headline: "SpaceX aftermath underscores a hot but choppy new-issue market",
-      summary: "The reopened IPO window (SpaceX, Doncasters, Quantinuum) stayed busy even through last week's tech wobble, with the Lime/ITG/Sinda slate this week testing demand into the July 4 break.",
-      source: "IPOScoop", url: "https://www.iposcoop.com/the-ipo-buzz-uber-backed-lime-lime-proposed-sets-174-million-deal-for-next-week/", date: "Jun 2026" }
+    { category: "Earnings", headline: "Chip bellwether TSMC on deck (Oct 15) as the AI trade stays central",
+      summary: "After Micron's blowout and Nvidia's march past a ~$5.8T market cap, the world's top foundry TSMC reports Q3 on Oct 15 — a key read on whether AI-hardware demand can keep justifying megacap valuations into year-end.",
+      source: "Nasdaq", url: "https://www.nasdaq.com/articles/3-quarterly-reports-watch-week-nflx-pep-tsm", date: "Oct 2026" }
   ],
 
   /* ---------- VENTURE CAPITAL (GCC-weighted + big global) ---------- */
   ventureCapital: [
-    { region: "GCC", headline: "GCC private debt hit $4.1B in 2025, overtaking VC — Stride report",
-      summary: "Structured private credit in the GCC reached $4.1B in 2025 (from ~$500M in 2024), surpassing the region's $3.3B of VC and making up over half of $7.4B in tracked funding; fintech took ~95%, led by Saudi names like Tamara ($2.4B) and Lendo ($740M).",
-      source: "Arab News", url: "https://www.arabnews.com/node/2648888/business-economy", date: "Jun 28, 2026" },
+    { region: "GCC", headline: "Saudi fintech Barq becomes a unicorn with a $329.5M Series A",
+      summary: "Riyadh digital-payments app Barq raised a $329.5M Series A — one of Saudi Arabia's largest-ever — at a $1.85B valuation, with Noon Investments, Sohar International Bank and the M20 Fund participating; Barq says it has 15M+ users.",
+      source: "Wamda / Arab News", url: "https://www.wamda.com/2026/09/saudi-fintech-barq-closes-329-5-million-series-a", date: "Sep 2026" },
 
-    { region: "GCC", headline: "Qatar expands the QIA Fund-of-Funds to $3B and offers AI compute via 'Qai'",
-      summary: "The Qatar Investment Authority added $2B (to $3B total) and five new managers across AI, fintech, blockchain and infrastructure (now 12), while QIA and Qatar Development Bank will provide compute from Qatar's new AI firm Qai to portfolio startups.",
-      source: "QIA", url: "https://www.qia.qa/en/Newsroom/Pages/Qatar-Prime-Minister-and-Minister-of-Foreign-affairs-announces-expansion-of-QIAs-Fund-of-Funds-program-welcoming-new-global-VCs-to-Qatar.aspx", date: "Jun 2026" },
+    { region: "GCC", headline: "Tabby raises $233M Series F at a $6.5B valuation",
+      summary: "Saudi/UAE fintech Tabby raised $233M (up ~44% from its $4.5B mark a year earlier), led by Blue Pool Capital with HSG, Wellington and Arbor Ventures, as it expands beyond BNPL into broader credit ahead of a widely expected IPO.",
+      source: "FinTech Futures", url: "https://www.fintechfutures.com/venture-capital-funding/tabby-raises-233m-at-6-5bn-valuation", date: "Sep 2026" },
 
-    { region: "GCC", headline: "Foodics (Saudi) fully acquires Greece's Norma AI",
-      summary: "Saudi F&B-SaaS unicorn Foodics completed a full buyout of Greek hospitality-AI startup Norma AI (amount undisclosed), converting a 2025 minority stake into full ownership to build agentic restaurant-AI tools.",
-      source: "Arab News", url: "https://www.arabnews.com/node/2648741/business-economy", date: "Jun 27, 2026" },
+    { region: "GCC", headline: "Paymob lands a $35M pre-Series C co-led by Mubadala",
+      summary: "MENA payments-infrastructure firm Paymob (Egypt/UAE/Saudi/Oman) raised $35M co-led by Mubadala and the EBRD, with British International Investment, Global Ventures and DPI Ventures; it now serves 390,000+ merchants.",
+      source: "Arab News", url: "https://www.arabnews.com/startups/startup-wrap-funding-momentum-continues-in-mena-despite-regional-headwinds-3002904", date: "Sep 26, 2026" },
 
-    { region: "GCC", headline: "CargoX (UAE) raises a $250M growth round led by BlueFive Capital",
-      summary: "Autonomous-logistics player CargoX (led by ex-Talabat CEO Tomaso Rodriguez) raised $250M led by BlueFive Capital to scale autonomous freight — one of the region's largest growth rounds of 2026.",
-      source: "Arab News", url: "https://www.arabnews.com/node/2646163/business-economy", date: "Jun 2026" },
+    { region: "GCC", headline: "Bahrain's Tarabut secures $50M in strategic financing",
+      summary: "Open-banking infrastructure firm Tarabut raised $50M led by Riyad Bank, the SAB X-Tech Fund and GIB Saudi Arabia (with Zamil Group and Kanoo Ventures) to deepen its Saudi expansion.",
+      source: "Arab News", url: "https://www.arabnews.com/startups/startup-wrap-saudi-fintechs-lead-regional-funding-surge-as-smes-secure-major-deals-3002142", date: "Sep 19, 2026" },
 
-    { region: "GCC", headline: "Sovra (UAE) raises a $2M+ pre-seed for digital-dollar accounts",
-      summary: "Self-custodial stablecoin fintech Sovra raised $2M+ pre-seed led by Pharsalus Capital, with angels including Naguib Sawiris, Ramp co-founder Karim Atiyeh and 21Shares' Hany Rashwan, targeting MENA young professionals and the diaspora.",
-      source: "Wamda", url: "https://www.wamda.com/2026/06/sovra-lands-2-million-pre-seed-led-pharsalus-capital", date: "Jun 2026" },
+    { region: "GCC", headline: "Saudi fintech Abwab.ai raises a $4M seed led by Speedinvest",
+      summary: "Riyadh-based Abwab.ai closed a $4M seed led by Speedinvest to build AI-driven financial and credit infrastructure for the region.",
+      source: "Arab News", url: "https://www.arabnews.com/startups/saudi-fintech-abwabai-raises-4m-in-seed-round-led-by-speedinvest-3002549", date: "Sep 21, 2026" },
 
-    { region: "GCC", headline: "Agenz (Morocco) closes an oversubscribed $5M seed for proptech data",
-      summary: "Real-estate data and proptech platform Agenz raised an oversubscribed $5M seed led by Breega, Attijariwafa Ventures and Saviu Ventures to scale its property-valuation tools.",
-      source: "Arab News", url: "https://www.arabnews.com/node/2648741/business-economy", date: "Jun 27, 2026" },
+    { region: "GCC", headline: "Qatar's Aligator raises a $1.2M seed led by QDB",
+      summary: "Qatar-based Aligator, which builds autonomous PR/communications AI agents, raised a $1.2M seed led by Qatar Development Bank (with Media City Qatar's Next Ventures) to expand across MENA.",
+      source: "Wamda", url: "https://www.wamda.com/2026/09/qatar-aligator-raises-1-2-million-seed-round", date: "Sep 30, 2026" },
 
-    { region: "GCC", headline: "Rentify (UAE) raises a $2M seed and launches 'Earn AI'",
-      summary: "UAE proptech-fintech Rentify raised a $2M seed (taking total funding to ~$2.5M) and launched its Earn AI automated rental-revenue product with enterprise clients including Gargash Real Estate.",
-      source: "Arab News", url: "https://www.arabnews.com/node/2648741/business-economy", date: "Jun 27, 2026" },
+    { region: "GCC", headline: "Saudi procurement-tech Project Suppliers raises a $1M pre-seed",
+      summary: "Saudi construction-and-procurement startup Project Suppliers closed a $1M (SAR 3.75M) pre-seed to scale its B2B building-materials platform — one of the freshest early-October GCC rounds.",
+      source: "Wamda", url: "https://www.wamda.com/2026/10/saudi-project-suppliers-raises-1-million-pre-seed", date: "Oct 5, 2026" },
 
-    { region: "GCC", headline: "Saudi Arabia leads MENA H1 2026 startup funding with $1.34B raised",
-      summary: "First-half 2026 data shows Saudi Arabia topping regional startup funding at $1.34B, overtaking the UAE for the period — a marker of the Kingdom's deepening venture ecosystem.",
-      source: "Wamda", url: "https://www.wamsaudi.com/news-articles/startup-wrap-saudi-arabia-leads-mena-startup-funding-h1-134bn-raised", date: "Jun 2026" },
+    { region: "GCC", headline: "UAE's Huspy acquires Italy's Integra Finance in an EU push",
+      summary: "Dubai proptech/mortgage platform Huspy acquired Italian brokerage Integra Finance as part of a planned ~$86M investment in Italy; Huspy now operates in 15 cities across the UAE, Spain, Saudi Arabia and Italy.",
+      source: "Arab News", url: "https://www.arabnews.com/startups/startup-wrap-funding-momentum-continues-in-mena-despite-regional-headwinds-3002904", date: "Sep 26, 2026" },
 
-    { region: "Global", headline: "General Intuition raises a $320M Series A at a $2.3B valuation",
-      summary: "Spatial-AI startup General Intuition — which trains 'world models' on hundreds of millions of hours of gameplay — raised a $320M Series A led by Khosla Ventures, with General Catalyst, Jeff Bezos and Eric Schmidt, taking total funding to ~$454M.",
-      source: "TechCrunch", url: "https://techcrunch.com/2026/06/25/general-intuitions-2-3b-bet-that-video-games-can-train-ai-agents-for-the-real-world/", date: "Jun 25, 2026" },
+    { region: "Global", headline: "OpenAI in talks to raise $30B+ at a ~$1.4T valuation",
+      summary: "OpenAI is reportedly in talks for a pre-IPO round of at least $30B at roughly a $1.4T valuation — among the largest private raises ever; CEO Sam Altman has ruled out a 2026 public listing. (Reported/in talks — not closed.)",
+      source: "TechCrunch", url: "https://techcrunch.com/2026/09/29/openai-repotedly-in-talks-to-raise-30b-round-at-1-4t-valuation/", date: "Sep 29, 2026" },
 
-    { region: "Global", headline: "Baseten raises a $1.5B Series F at a $13B valuation",
-      summary: "AI-inference platform Baseten closed a $1.5B Series F at a $13B valuation (its fourth raise in 18 months), led by Altimeter with Conviction, Spark, Sands and Wellington — the largest venture round of the week.",
-      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-marketing-robotics-baseten/", date: "Jun 26, 2026" },
+    { region: "Global", headline: "Instinct raises a $1B Series C at a $10B valuation",
+      summary: "San Francisco personal-AI-assistant startup Instinct raised $1B at a $10B valuation from Sequoia, Benchmark and Coatue — the largest US venture round of the week.",
+      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-cyber-real-estate-instinct/", date: "Oct 2, 2026" },
 
-    { region: "Global", headline: "AppsFlyer raises a $1B Series E at a $2.7B valuation",
-      summary: "Mobile-marketing and data-analytics firm AppsFlyer raised a $1B Series E at a $2.7B valuation, with backing from Unity, Meta, Moloco and Google.",
-      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-marketing-robotics-baseten/", date: "Jun 26, 2026" },
+    { region: "Global", headline: "EliseAI raises $350M at a $4B valuation",
+      summary: "EliseAI, which builds AI agents for housing and property management, raised $350M at a $4B valuation led by Andreessen Horowitz and Bessemer Venture Partners.",
+      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-cyber-real-estate-instinct/", date: "Oct 2, 2026" },
 
-    { region: "Global", headline: "Groq raises $650M for AI-inference chips",
-      summary: "AI-inference chip company Groq raised $650M in growth funding (led by Infinitum and Disruptive) to scale against Nvidia in inference, roughly six months after an Nvidia-related acquihire.",
-      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-marketing-robotics-baseten/", date: "Jun 26, 2026" }
+    { region: "Global", headline: "General Intuition raises $220M at a $6.2B valuation",
+      summary: "Foundational-AI startup General Intuition closed $220M at a $6.2B valuation, led by Valor Equity Partners and Atreides Management, extending the frenzy for frontier-AI bets.",
+      source: "Crunchbase News", url: "https://news.crunchbase.com/venture/biggest-funding-rounds-ai-cyber-real-estate-instinct/", date: "Oct 2, 2026" }
   ],
 
   /* ---------- LEBANON ECONOMY ---------- */
   lebanonEconomy: [
-    { label: "Lira / USD",         value: "~89,500",     sub: "89,573 on Jun 26; effectively pegged at the official band" },
-    { label: "Inflation (y/y)",    value: "~19%",        sub: "19.04% in May 2026 — eased from 20.02% in April" },
-    { label: "BdL FX Reserves",    value: "~$11.63B",    sub: "Mid-June 2026 (+$185M in early June; excludes gold)" },
-    { label: "Eurobonds",          value: "~26¢",        sub: "BLOM Bond Index 26.33 (week of Jun 18); in default since 2020" },
-    { label: "IMF Program",        value: "Stalled",     sub: "Early-stage talks; the IMF flags a 2026 contraction risk from the war" },
-    { label: "Reconstruction",     value: "~$11B",       sub: "World Bank estimate (total war cost ~$14B)" },
-    { label: "GDP Growth",         value: "+3.5% (2025)", sub: "World Bank sees +4.0% for 2026 (reform-contingent); IMF more cautious" },
-    { label: "Bank-System Losses", value: "~$80B",       sub: "The 'gap'; central to the stalled IMF deal" }
+    { label: "Lira / USD",         value: "~89,500",     sub: "Official band ~89,500; market ~89,700 — stable since 2023" },
+    { label: "Inflation (y/y)",    value: "~16.7%",      sub: "August 2026 — easing from ~19% in May" },
+    { label: "BdL FX Reserves",    value: "~$11.4B",     sub: "Sep 30, 2026 — broadly flat/gently declining (excludes gold)" },
+    { label: "Eurobonds",          value: "~29¢",        sub: "BLOM Bond Index ~29 (late Sept); +~19% YTD on reform/UAE-reengagement hopes; in default since 2020" },
+    { label: "IMF Program",        value: "No deal yet", sub: "IMF visit Sept 15–18 praised the bank-resolution law as 'a significant step'; a staff-level deal is still hoped-for" },
+    { label: "Reconstruction",     value: "~$11B+",      sub: "World Bank (Mar 2025) estimate — predates the 2026 war, so likely understated" },
+    { label: "GDP Growth",         value: "-6.4% (2026f)", sub: "World Bank — a war-driven contraction, reversing ~+4% in 2025" },
+    { label: "Bank-System Losses", value: "~$70–80B",    sub: "The 'gap'; the Gap Law on loss distribution is still the core fight" }
   ],
 
   /* ---------- GEOPOLITICAL MAP (today's hotspots) ---------- */
   mapPoints: [
-    { place: "Washington",        lat: 38.90, lng: -77.04, weight: 3, region: "US",          label: "Brokered the Jun 26 Israel–Lebanon framework and the US–Iran 60-day roadmap" },
-    { place: "Beirut",            lat: 33.89, lng: 35.50,  weight: 3, region: "Lebanon",     label: "Framework signed but unraveling at home — Berri says it 'will not pass'; Aoun & Salam defend it" },
-    { place: "South Lebanon",     lat: 33.38, lng: 35.48,  weight: 3, region: "Lebanon",     label: "Ceasefire shaky — the IDF demolished a Hezbollah tunnel Jun 28; the toll is over 4,200" },
-    { place: "Tehran",            lat: 35.69, lng: 51.39,  weight: 3, region: "Iran",        label: "60-day MoU holds, but the IAEA inspector-access dispute is unresolved" },
-    { place: "Strait of Hormuz",  lat: 26.57, lng: 56.25,  weight: 3, region: "Gulf",        label: "Tanker traffic recovering (~4.8M bpd); oil bouncing off ~4-month lows" },
-    { place: "Gulf of Oman",      lat: 24.50, lng: 58.50,  weight: 2, region: "Gulf",        label: "Tankers clearing stored Iranian crude to buyers under the 60-day waiver" },
-    { place: "Doha",              lat: 25.29, lng: 51.53,  weight: 2, region: "Gulf",        label: "Qatar's mediation channel active — the US and Iran are set to meet in Qatar this week" },
-    { place: "Riyadh",            lat: 24.71, lng: 46.68,  weight: 2, region: "Gulf",        label: "OPEC+ anchor — a Jul 5 meeting sets August output as oil sits near 4-month lows" },
-    { place: "Damascus",          lat: 33.51, lng: 36.29,  weight: 1, region: "Syria",       label: "Damascus signals readiness to revive the 1974 Israel–Syria disengagement via US mediation" },
-    { place: "Gaza",              lat: 31.50, lng: 34.47,  weight: 1, region: "Israel-Gaza", label: "The Oct-2025 truce holds but is fragile; aid access remains severely curtailed" }
+    { place: "Beirut",            lat: 33.89, lng: 35.50,  weight: 3, region: "Lebanon",     label: "Truce fraying — Israel still holds ~20% of the south; IMF talks continue with no deal yet; GDP set to contract ~6%" },
+    { place: "South Lebanon",     lat: 33.38, lng: 35.48,  weight: 3, region: "Lebanon",     label: "Near-daily Israeli strikes test the ceasefire; the army took phase-one control but Hezbollah refuses to disarm" },
+    { place: "Tehran",            lat: 35.69, lng: 51.39,  weight: 3, region: "Iran",        label: "The US–Iran deal collapsed into renewed conflict; UN snapback sanctions reimposed and IAEA inspectors locked out" },
+    { place: "Strait of Hormuz",  lat: 26.57, lng: 56.25,  weight: 3, region: "Gulf",        label: "Shipping disruption from the Iran conflict keeps Brent crude near $100" },
+    { place: "Washington",        lat: 38.90, lng: -77.04, weight: 2, region: "US",          label: "Fed hiked to 3.75–4.00%; a shutdown was averted (funded to Dec 11); midterms loom Nov 3" },
+    { place: "Gaza",              lat: 31.50, lng: 34.47,  weight: 3, region: "Israel-Gaza", label: "Trump's ceasefire one year on — phase two deadlocked; 1,400+ killed since the truce and a deepening hunger crisis" },
+    { place: "Jerusalem",         lat: 31.77, lng: 35.21,  weight: 2, region: "Israel-Gaza", label: "Oct 7 third-anniversary commemorations amid multi-front pressure (Lebanon, Iran, Gaza)" },
+    { place: "Doha",              lat: 25.29, lng: 51.53,  weight: 2, region: "Gulf",        label: "Qatar shuttling between the US, Israel and Hamas on the Gaza file" },
+    { place: "Damascus",          lat: 33.51, lng: 36.29,  weight: 1, region: "Syria",       label: "Al-Sharaa–Israel security talks stalled near '90%'; he demanded an Israeli pullback at the UN" },
+    { place: "Riyadh",            lat: 24.71, lng: 46.68,  weight: 1, region: "Gulf",        label: "OPEC+ held October output steady as the Hormuz risk premium lifts oil" }
   ],
   mapArcs: [
-    { from: [38.90, -77.04], to: [33.89, 35.50] },
-    { from: [38.90, -77.04], to: [35.69, 51.39] },
     { from: [35.69, 51.39],  to: [26.57, 56.25] },
-    { from: [25.29, 51.53],  to: [35.69, 51.39] },
-    { from: [33.89, 35.50],  to: [33.38, 35.48] }
+    { from: [38.90, -77.04], to: [35.69, 51.39] },
+    { from: [25.29, 51.53],  to: [31.50, 34.47] },
+    { from: [33.89, 35.50],  to: [31.77, 35.21] },
+    { from: [38.90, -77.04], to: [25.29, 51.53] }
   ],
 
   /* ---------- POLITICS ---------- */
   politics: {
 
     middleEast: [
-      { region: "Lebanon", headline: "Speaker Berri declares the Israel–Lebanon framework 'will not pass'",
-        summary: "Parliament Speaker and Hezbollah ally Nabih Berri said Monday the trilateral framework 'will not pass, and it will not be implemented in its current form,' calling it 'an agreement of dictates.' As he controls the parliamentary path, his rejection is a major blow to ratifying the Jun 26 Washington deal.",
-        source: "L'Orient Today", url: "https://today.lorientlejour.com/article/1539618/nabih-berri-to-lolj-the-israel-lebanon-agreement-will-not-pass.html", date: "Jun 29, 2026" },
+      { region: "Lebanon", headline: "June truce frays — Israel keeps striking the south and still occupies ~20% of it",
+        summary: "The US-brokered truce in effect since ~June 19 is holding only in name: Israel still holds five positions across roughly 20% of south Lebanon and has carried out near-daily strikes (a mid-August strike killed 11, an early-September one 12). The 2026 war's cumulative toll is now above ~4,300 Lebanese killed and ~1.2 million displaced.",
+        source: "Al Jazeera", url: "https://www.aljazeera.com/news/2026/8/16/why-has-israel-escalated-attacks-in-southern-lebanon-despite-ceasefire", date: "Sep–Oct 2026" },
 
-      { region: "Lebanon", headline: "Hezbollah calls the deal 'null and void'; protests in Dahiyeh",
-        summary: "Hezbollah chief Naim Qassem declared the framework 'null and void' and 'a surrender of sovereignty,' saying it should be replaced by the US–Iran MoU; supporters protested in Beirut's southern suburbs over the weekend (blocking roads, with reported clashes), and an MP warned of possible 'internal conflict.'",
-        source: "Al Jazeera", url: "https://www.aljazeera.com/features/2026/6/28/in-lebanon-framework-agreement-signed-with-israel-spurs-protest-criticism", date: "Jun 28, 2026" },
+      { region: "Lebanon", headline: "'Disarmament-for-withdrawal' framework stalled — Hezbollah refuses, army finishes only phase one",
+        summary: "The June 26 US framework (Israeli withdrawal in exchange for Hezbollah disarmament) is still rejected by Hezbollah (chief Qassem called it 'null and void') and Speaker Berri; the army completed only phase one south of the Litani, while Hezbollah refuses to give up weapons as long as strikes and occupation continue. Aoun and Salam back a state monopoly on arms.",
+        source: "Al Jazeera", url: "https://www.aljazeera.com/features/2026/6/27/israel-lebanon-deal-ties-ceasefire-to-hezbollah-disarmament-will-it-work", date: "Sep 2026" },
 
-      { region: "Lebanon", headline: "Aoun and Salam defend the framework as a 'first step' to sovereignty",
-        summary: "President Joseph Aoun called the deal 'the first step on the path towards Lebanon restoring its sovereignty,' vowing 'no more occupation,' and — in a call with Trump — urged Washington to press Israel to withdraw. PM Nawaf Salam said its primary aim is a full Israeli withdrawal, the return of the displaced, and reconstruction. The presidency-vs-Hezbollah split is now the central fault line.",
-        source: "France 24", url: "https://www.france24.com/en/middle-east/20260629-middle-east-live-lebanon-rejects-us%E2%80%93israel-framework-hezbollah-asserts-right-to-self-defence", date: "Jun 29, 2026" },
+      { region: "Lebanon", headline: "IMF leaves Beirut with no program yet; economy set to shrink ~6.4% in 2026",
+        summary: "An IMF mission (Sept 15–18) said no arrangement is in place yet but praised the amended Bank Resolution Law as 'a significant step forward'; the World Bank projects the war-hit economy to contract 6.4% in 2026 after ~+4% in 2025, with reconstruction needs earlier pegged near $11B and a 'financial gap law' still pending.",
+        source: "IMF", url: "https://www.imf.org/en/news/articles/2026/09/18/pr26297-lebanon-imf-staff-concludes-visit-to-lebanon", date: "Sep 18, 2026" },
 
-      { region: "Lebanon", headline: "Ceasefire shaky — IDF demolishes a Hezbollah tunnel; toll over 4,200",
-        summary: "The truce is holding only loosely: on Jun 28 the IDF published footage of demolishing a major Hezbollah tunnel under Majdal Zoun (a demolition the US had pressed it to postpone), and weekend reporting cited fresh casualties in the south. Lebanon's cumulative toll since March 2 is now reported above 4,200 killed (last firm count ~4,057 / 12,121).",
-        source: "Naharnet", url: "https://www.naharnet.com/stories/en/320875-one-killed-2-wounded-as-israeli-forces-open-fire-on-civilians-in-nabatieh-al-fawqa", date: "Jun 28, 2026" },
+      { region: "Iran", headline: "US–Iran 'final deal' collapsed into war; UN snapback sanctions reimposed",
+        summary: "The June 2026 roadmap never produced a final deal — talks collapsed, the IAEA declared Iran non-compliant, and UN 'snapback' sanctions were reimposed, with agency cameras disabled and inspectors blocked from the bombed Fordow, Natanz and Isfahan sites. A late-September report that Iran offered inspector access for sanctions relief was publicly denied by Tehran (unconfirmed).",
+        source: "CNN", url: "https://www.cnn.com/2026/09/10/politics/iran-nuclear-program-inspections-iaea", date: "Sep–Oct 2026" },
 
-      { region: "Iran", headline: "US–Iran roadmap holds but the IAEA-access dispute persists; Hormuz recovering",
-        summary: "Trump insists Iran 'completely agreed' to IAEA visits while Tehran says there are 'no plans' for inspectors before a final deal, and Grossi says talks have 'barely initiated.' At sea, ~20 tankers (~35M barrels) have exited Hormuz since the deal and confirmed flows have risen to ~4.8M bpd, with the US and Iran set to meet again this week.",
-        source: "PBS NewsHour", url: "https://www.pbs.org/newshour/world/dispute-over-nuclear-inspections-shows-how-u-s-and-iran-are-negotiating-in-public", date: "Jun 28, 2026" },
+      { region: "Iran", headline: "Iran's economy buckles under reimposed sanctions — inflation near 90%",
+        summary: "With UN sanctions back and the war disrupting oil exports, Iran's inflation is running near 90% year-on-year and the rial has fallen roughly 30%, deepening the economic strain even as Tehran shifts to a more offensive military posture.",
+        source: "Rigzone", url: "https://www.rigzone.com/news/wire/iran_wants_sanctions_eased_to_allow_back_nuclear_inspectors-02-oct-2026-184755-article/", date: "Oct 2, 2026" },
 
-      { region: "Gulf", headline: "OPEC+ Eight meet July 5 as Hormuz shipping normalizes",
-        summary: "The eight monthly-quota OPEC+ nations (Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria, Oman + UAE) meet July 5 to set August output, with a ~188,000 bpd adjustment in play; the meeting lands as post-deal Hormuz shipping recovers and crude sits near 4-month lows.",
-        source: "OPEC", url: "https://www.opec.org/pr-detail/604-7-june-2026.html", date: "Jun 2026" },
+      { region: "Gulf", headline: "OPEC+ holds October output steady as Hormuz disruption keeps Brent near $100",
+        summary: "At a Sept 6 virtual meeting the core OPEC+ producers kept October output at September levels, citing uncertainty while the Iran war disrupts the Strait of Hormuz; Brent traded around $98–102 (up ~55% year-on-year), with the G7 drawing down emergency stockpiles to ease prices.",
+        source: "Energy Connects", url: "https://www.energyconnects.com/news/oil/2026/september/opecplus-keeps-output-policy-unchanged-for-october", date: "Oct 6, 2026" },
 
-      { region: "Syria", headline: "Damascus signals readiness to revive the 1974 disengagement with Israel",
-        summary: "Syrian FM al-Shaibani reiterated Damascus's 'aspiration to cooperate with the United States to return to the 1974 disengagement agreement,' with Syria–Israel talks held in Paris under US envoy Tom Barrack on a renewed Golan security arrangement; President al-Sharaa has reaffirmed the commitment, though no deal is signed.",
-        source: "The National", url: "https://www.thenationalnews.com/news/mena/2026/01/07/whats-the-1974-disengagement-agreement-between-syria-and-israel/", date: "Jun 2026" },
+      { region: "Israel-Gaza", headline: "Trump's Gaza ceasefire one year on — phase two deadlocked, hunger persists",
+        summary: "A year after the October 2025 truce, phase two is stuck on sequencing (Israel wants Hamas disarmed before completing its withdrawal; Hamas ties disarmament to withdrawal). Gaza's health ministry says 1,400+ Palestinians have been killed since the truce; ~77% face acute food insecurity and most remain displaced.",
+        source: "UN OCHA", url: "https://www.ochaopt.org/content/humanitarian-situation-update-331-gaza-strip", date: "Oct 2026" },
 
-      { region: "Israel-Gaza", headline: "Gaza ceasefire holds but is fragile; aid access severely curtailed",
-        summary: "The US-backed truce (under UNSC Res. 2803) is intact but deteriorating — UN briefers warned Gazans remain 'trapped in a humanitarian nightmare,' with ~1,000 Palestinians killed since it began, daily meal deliveries down to ~678,000 (from 1.5M in March), and 330,000+ at risk of losing their main drinking-water source.",
-        source: "UN Press", url: "https://press.un.org/en/2026/sc16390.doc.htm", date: "Jun 2026" }
+      { region: "Syria", headline: "Al-Sharaa–Israel security talks stall near '90%'; president demands withdrawal at the UN",
+        summary: "In his Sept 23 UN General Assembly speech, Syrian President al-Sharaa demanded Israel pull back to its Dec 8, 2024 lines and reaffirmed the 1974 disengagement agreement, after US-backed talks on a new security pact reportedly reached ~90% before stalling over sequencing; Israeli forces remain inside the Golan buffer.",
+        source: "Al Jazeera", url: "https://www.aljazeera.com/news/2026/9/23/syrias-al-sharaa-warns-israeli-attacks-endanger-delicate-post-war-recovery", date: "Sep 23, 2026" }
     ],
 
     us: [
-      { headline: "Supreme Court's marquee rulings still pending — decisions due this week",
-        summary: "As of the weekend the Court had not ruled on birthright citizenship (Trump v. Barbara), firing Fed Governor Lisa Cook (Trump v. Cook), or the transgender-sports cases — all expected on the Jun 29–30 opinion days (after this snapshot). For context, on Jun 25 it handed Trump two immigration wins authored by Justice Alito.",
-        source: "SCOTUSblog", url: "https://www.scotusblog.com/2026/06/major-decisions-ahead/", date: "Jun 27, 2026" },
+      { headline: "No shutdown — Trump signed a stopgap Sept 2 funding the government through Dec 11",
+        summary: "Congress acted nearly a month early: the Senate (90–6) and House (370–48) passed a continuing resolution, signed Sep 2, keeping the government open past the Oct 1 fiscal-year start and the Nov 3 midterms. There is no shutdown; the next funding cliff is Dec 11.",
+        source: "NBC News", url: "https://www.nbcnews.com/politics/congress/senate-leaders-reach-deal-avert-shutdown-2026-elections-rcna590564", date: "Sep 2, 2026" },
 
-      { headline: "Hawkish Fed after the hot PCE; jobs report Thursday, next FOMC Jul 29",
-        summary: "May PCE hit 4.1% y/y (core 3.4%) and the Fed has erased its 2026 cut signal — 9 of 18 officials now pencil at least one hike, with year-end PCE projected at 3.6%. Markets have largely priced out 2026 easing ahead of Thursday's June jobs report.",
-        source: "Morningstar", url: "https://www.morningstar.com/economy/may-pce-expected-show-rising-inflation", date: "Jun 25, 2026" },
+      { headline: "Fed hikes in September — first increase since 2023 — to 3.75%–4.00%",
+        summary: "After holding 9–3 on Jul 29, the FOMC raised rates 25bp on Sep 16 in a unanimous 12–0 vote — its first hike since 2023 — as Chair Kevin Warsh prioritized fighting the Iran-war energy-driven inflation; markets price roughly one more possible hike in 2026.",
+        source: "CNBC", url: "https://www.cnbc.com/2026/09/16/fed-meeting-today-live-updates.html", date: "Sep 16, 2026" },
 
-      { headline: "ECB's Sintra forum opens — Lagarde hosts global central bankers",
-        summary: "The ECB Forum on Central Banking runs Jun 29–Jul 1 in Sintra ('Shaping Europe's future'), with Lagarde hosting Monday and participants including the IMF's Tobias Adrian and the BoE's Sarah Breeden — a key venue for rate signals during a hawkish-Fed week.",
-        source: "ECB", url: "https://www.ecb.europa.eu/press/conferences/html/20260629_ecb_forum_on_central_banking.en.html", date: "Jun 29, 2026" },
+      { headline: "Hiring stalls — just 29,000 jobs added in September; unemployment up to 4.2%",
+        summary: "The September jobs report (released Oct 2) showed only +29,000 payrolls and unemployment rising to 4.2%, with sharp downward revisions to July (−10,000) and August (+133,000) and slowing wage growth — a clear cooldown even as inflation stays above target.",
+        source: "CNN", url: "https://www.cnn.com/2026/10/02/economy/us-jobs-report-september-final", date: "Oct 2, 2026" },
 
-      { headline: "Treasury's 60-day Iran oil-sanctions waiver being implemented",
-        summary: "OFAC's General License X (tied to the Jun 17 MoU) authorizes Iranian oil and petrochemical transactions in dollars through Aug 21; the Navy lifted its blockade Jun 18, and billions in Iranian oil revenue are unlocking as Hormuz traffic resumes, even as Trump and Tehran spar publicly over nuclear inspections.",
-        source: "CNBC", url: "https://www.cnbc.com/2026/06/23/us-iran-oil-sanction-relief-strait-of-hormuz-peace-deal-.html", date: "Jun 23, 2026" },
+      { headline: "Democrats favored for the House with four weeks to the midterms; Trump approval ~37%",
+        summary: "Heading into Nov 3, Democrats lead the generic ballot by roughly 9 points (NBC 52–43) and are favored to retake the House (Cook forecasts a +5 to +15 net seat gain), with Trump's approval near 37% — among the lowest pre-midterm readings in decades — though the Senate map stays tougher for Democrats.",
+        source: "NPR", url: "https://www.npr.org/2026/10/06/nx-s1-5989694/midterm-elections-control-congress", date: "Oct 6, 2026" },
 
-      { headline: "Weekend politics: midterms maneuvering and an 'America First' fight",
-        summary: "Weekend US coverage centered on Trump's continued efforts to reshape how the 2026 midterms are conducted amid fears of a Democratic takeover, and an internal battle over the future of 'America First' foreign policy — with no single dominant breaking event domestically.",
-        source: "NPR", url: "https://www.npr.org/programs/weekend-edition-sunday/nx-s1-5840011/weekend-edition-sunday-for-june-28-2026", date: "Jun 28, 2026" }
+      { headline: "Supreme Court's June rulings went against Trump on birthright & the Fed; new term opened Oct 5",
+        summary: "In late June the Court struck down Trump's birthright-citizenship order 6–3 (Trump v. Barbara) and blocked his firing of Fed Governor Lisa Cook 5–4 (she keeps her seat), while upholding state transgender-sports bans 6–3. The new term began Oct 5 with a docket featuring AR-15 bans, immigration detention and a climate-liability case.",
+        source: "SCOTUSblog", url: "https://www.scotusblog.com/2026/06/court-rules-that-states-can-exclude-transgender-athletes-from-girls-and-womens-sports/", date: "Oct 5, 2026" }
     ]
   },
 
@@ -333,9 +330,9 @@ window.DASHBOARD_DATA = {
     { name: "stockanalysis.com", url: "https://stockanalysis.com/" },
     { name: "CNBC",              url: "https://www.cnbc.com/" },
     { name: "Al Jazeera",        url: "https://www.aljazeera.com/" },
-    { name: "L'Orient Today",    url: "https://today.lorientlejour.com/" },
+    { name: "CNN",               url: "https://www.cnn.com/" },
     { name: "Crunchbase News",   url: "https://news.crunchbase.com/" },
     { name: "Arab News",         url: "https://www.arabnews.com/" },
-    { name: "SCOTUSblog",        url: "https://www.scotusblog.com/" }
+    { name: "IMF",               url: "https://www.imf.org/" }
   ]
 };
